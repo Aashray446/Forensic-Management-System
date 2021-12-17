@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.PasswordAuthentication;
 import java.text.ParseException;
 
 
@@ -26,8 +27,10 @@ public class Credential {
             String Checkname = (String) jo.get(this.name);
             if (Checkname==null) {
                 System.out.println("Invalid username");
-            } else {
-                System.out.println("Valid username");
+            } else if (Checkname.equals(this.password)) {
+                System.out.println("Password matched");
+            }else{
+                System.out.println("Password wrong");
             }
 
         } catch (FileNotFoundException e) {
