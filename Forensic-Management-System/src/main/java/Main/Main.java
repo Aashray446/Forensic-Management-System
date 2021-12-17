@@ -1,12 +1,16 @@
 package Main;
 
-import Login.Credential;
+import Login.Login;
+
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Credential User = new Credential("Akshaj.S.R","@123Amigo");
-        User.checkCredentials();
+        Scanner in = new Scanner(System.in);
+        Login User = new Login(in.next(),in.next());
+        if(User.checkCredentials()){
 
+        }
     }
 }
