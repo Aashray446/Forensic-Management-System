@@ -1,4 +1,4 @@
 package userclasses;
 
-public class Investigator {
+public class Investigator extends User{
 }

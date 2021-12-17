@@ -1,4 +1,4 @@
 package userclasses;
 
-public class ForensicExpert {
+public class ForensicExpert extends User {
 }

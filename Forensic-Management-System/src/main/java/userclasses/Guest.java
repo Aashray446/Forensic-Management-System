@@ -1,4 +1,4 @@
 package userclasses;
 
-public class Guest {
+public class Guest extends User{
 }
