@@ -1,4 +1,4 @@
-package main_classes;
+package cases;
 
 
 import java.util.ArrayList;
