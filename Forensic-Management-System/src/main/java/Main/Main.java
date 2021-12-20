@@ -1,16 +1,12 @@
 package Main;
+import Main_objects.*;
 
-import Login.Login;
-
-import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        Login User = new Login(in.next(),in.next());
-        if(User.checkCredentials()){
 
-        }
+        Case a = new Case(1, "Aasjrau", "des asd cription", 12, "Aashray Katiyar");   
+       
     }
 }
