@@ -1,4 +1,4 @@
-package userclasses;
+package User;
 
 public class User {
     int id;

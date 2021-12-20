@@ -1,4 +1,4 @@
-package cases;
+package Main_objects;
 
 public class Case {
     private int id;

@@ -19,7 +19,7 @@ public class Login {
 
     public boolean checkCredentials() {
         try {
-            Object obj = new JSONParser().parse(new FileReader("src/main/java/Login/credentials.json"));
+            Object obj = new JSONParser().parse(new FileReader("Forensic-Management-System/src/main/java/Login/credentials.json"));
             JSONObject jo = (JSONObject) obj;
             String Checkname = (String) jo.get(this.name);
             if (Checkname==null) {

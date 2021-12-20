@@ -1,4 +1,4 @@
-package userclasses;
+package User;
 
 public class ForensicExpert extends User {
 }

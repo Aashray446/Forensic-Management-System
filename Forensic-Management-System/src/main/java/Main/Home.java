@@ -1,9 +1,9 @@
 package Main;
 
-import userclasses.Admin;
-import userclasses.ForensicExpert;
-import userclasses.Guest;
-import userclasses.Investigator;
+import User.Admin;
+import User.ForensicExpert;
+import User.Guest;
+import User.Investigator;
 
 public class Home {
     void callAdmin(){
