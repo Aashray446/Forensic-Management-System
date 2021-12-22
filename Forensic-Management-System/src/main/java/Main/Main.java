@@ -1,12 +1,14 @@
 package Main;
 import Main_objects.*;
-
+import Helper_class.handle_dbms;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Case a = new Case(1, "Aasjrau", "des asd cription", 12, "Aashray Katiyar");   
-       
+        String a = "asdasd asdasda sdea sd";
+        handle_dbms dbms = new handle_dbms();
+        System.out.println(dbms.read("user.csv").toString());
+        
     }
 }
