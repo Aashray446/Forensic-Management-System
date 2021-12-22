@@ -124,7 +124,6 @@ public class Evidence {
     }
 
     //PEOPLE
-
     public Evidence(String name, String ethnicity, String religion, String gender, String mothertongue,float height,float weight, String criminalrecords, String address, String DOB, String ID_Proofs, String contactinfo, String identification_marks) {
         this.name = name;
         this.ethnicity = ethnicity;
