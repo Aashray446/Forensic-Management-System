@@ -1,19 +1,57 @@
 package Evidence;
 
 public class Evidence {
-    private String id;
-    private String description;
-    private String type;
-    private String time;
-    private String date;
-    private String collected_by;
 
-    public Evidence(String id, String description, String type, String time, String date, String collected_by) {
-        this.id = id;
-        this.description = description;
-        this.type = type;
-        this.time = time;
-        this.date = date;
-        this.collected_by = collected_by;
-    }
+    //COMMON PROPERTIES
+    private int evidenceid;
+    private String evidencename;
+    private String evidencedescription;
+    private String evidencetype;
+    private String timeofcollection;
+    private String dateofcollection;
+    private String placeofcollection;
+    private String collectedby;
+    private String additionalinfo;
+
+    //MATERIALISTIC PROPERTIES
+    private String color;
+    private String manufacturer;
+    private String type;
+    private String physical_state; //solid or liquid
+
+    //VEHICLE PROPERTIES
+    private String vehiclenumber;
+    private String vehiclemodel;
+    private String vehicletype;
+    private String vehiclecolour;
+
+
+    //BIOLOGICAL PROPERTIES
+    private String dna;
+    private String bloodgroup;
+    private String drugcontent;
+    private String proteins;
+    private String enzymes;
+    private String antigens;
+    private String Rh_grouping;
+
+
+    //PERSON
+    private String name;
+    private String ethnicity;
+    private String religion;
+    private String gender;
+    private String mothertongue;
+    private String crimerecords;
+    private String Address;
+    private String DOB;
+    private String ID_Proofs;
+    private String contactinfo;
+    private String identification_marks;
+
+
+
+
+
 }
+
