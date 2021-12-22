@@ -28,14 +28,15 @@ public class Case {
         helper_functions.clear_screen();
         System.out.println("Congratulations, Case had been  ");
         System.out.println( "With Details: - " );
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------------");
         System.out.printf("%10s %20s %20s %20s %20s", "ID", "NAME", "DESCRIPTION", "CASE ID", "ADDED BY WHOM");
         System.out.println();
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
             System.out.format("%10s %20s %20s %20s %20s",
-                    this.id, this.name, "nasdasd", this.case_id, this.added_by_whom);
+                    this.id, this.name, this.description, this.case_id, this.added_by_whom);
             System.out.println();
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------------");
     }
- 
+
+    
 }
