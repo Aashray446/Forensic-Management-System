@@ -1,5 +1,5 @@
 package Login.Home;
-import Login.Admin.Admin;
+import Admin.Admin;
 
 public class CheckRole {
     public static void Role(String user_id)

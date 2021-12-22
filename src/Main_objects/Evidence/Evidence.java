@@ -2,8 +2,6 @@ package Main_objects.Evidence;
 
 public class Evidence {
 
-    //TODO->add,remove properties and constructors
-
     //COMMON PROPERTIES
     private int evidenceid;
     private String evidencename;
@@ -16,14 +14,22 @@ public class Evidence {
     private String additionalinfo;
 
 
-
-
     //TODO -> add functions to methods
 
-    public void viewEvidences(){
-        
-        
 
+    public void setValue(int evidenceid, String evidencename, String evidencedescription, String evidencetype, String timeofcollection, String dateofcollection, String placeofcollection, String collectedby, String additionalinfo) {
+        this.evidenceid = evidenceid;
+        this.evidencename = evidencename;
+        this.evidencedescription = evidencedescription;
+        this.evidencetype = evidencetype;
+        this.timeofcollection = timeofcollection;
+        this.dateofcollection = dateofcollection;
+        this.placeofcollection = placeofcollection;
+        this.collectedby = collectedby;
+        this.additionalinfo = additionalinfo;
+    }
+
+    public void viewEvidences(){
 
     }
     public void updateEvidences(int evidenceid){
