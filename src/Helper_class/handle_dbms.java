@@ -14,7 +14,7 @@ public class handle_dbms {
     
    public boolean write_to_file(String data, String file_name) {
         try{
-            String content = data;
+            String content = data + "\n";
             //Specify the file name and path here
             File file =new File(file_name);
     
@@ -48,7 +48,7 @@ public class handle_dbms {
         BufferedReader bis = null;
         FileReader  fis= null;
         String line = "";
-        ArrayList<String> all_Data = new ArrayList<String>();
+        ArrayList<String[]> all_Data = new ArrayList<String[]>();
         try
         {
             //FileInputStream to read the file
@@ -62,7 +62,7 @@ public class handle_dbms {
              * returns 0 when there are no more bytes
              * present in the file to be read*/
             while( (line = bis.readLine()) != null ){             
-                all_Data.add(line);
+                all_Data.add(line.split(","));
             }
   }
   catch(FileNotFoundException fnfe)
@@ -87,6 +87,8 @@ public class handle_dbms {
                 }         
           }
           return all_Data;
+          // Converting every single line to multiple String[]
+          //ArrayList<String[]> converted_data = new ArrayList<String[]>();
     }
     
     //Write Array 
@@ -134,6 +136,16 @@ public class handle_dbms {
          return false;
     }
 
+    public String convert_to_string(ArrayList<String[]> data) {
+        String converted_data = "";
+        for (String[] line : data) {
+            for(String word : line){
+                converted_data = converted_data + word + ',';
+            }
+            converted_data = converted_data+"\n";
+        }
+        return converted_data;
+    }
 
 }
 
