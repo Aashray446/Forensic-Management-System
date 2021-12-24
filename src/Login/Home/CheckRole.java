@@ -1,5 +1,7 @@
 package Login.Home;
-import Admin.Admin;
+
+
+import Login.Admin.Admin;
 
 public class CheckRole {
     public static void Role(String user_id)
@@ -50,7 +52,7 @@ public class CheckRole {
                       {
                           ex.printStackTrace();
                       }
-                      Admin.admin();
+
                       
                     break; 
                     }
