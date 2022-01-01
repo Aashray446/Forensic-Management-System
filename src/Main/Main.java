@@ -14,22 +14,21 @@ public class Main {
     public static void main(String[] args) {
 
       Login login_session = new Login();
-
+      
       login_session.check_password();
       
+      if (login_session.role.equals("admin")) {
+        
+      }
+      else if (login_session.role.equals("forensic")) {
       
     }
+    else if(login_session.role.equals("police")) {
 
-
-    //Trying to implement Routing Logic Based on Session storage
-   /* static void routing_loop(boolean logged_in, Login login_session) {
-      while(logged_in) {
-        if(login_session.role.equals("admin")) {
-          while(true) {
-            
-          }
-        }
-      }
-    } */
+    }
+    else{
+      System.out.println("Something went wrong");
+    }
+  }
 
 }

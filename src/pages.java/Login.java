@@ -12,26 +12,28 @@ public class Login {
     public String  role;
 
     Scanner in = new Scanner(System.in);
+    helper_functions help = helper_functions.getInstance();
+    handle_dbms dbms = handle_dbms.getInstance();
 
     public Login() {
-        helper_functions.clear_screen();
-        helper_functions.print_label("Welcome");
-        helper_functions.print_label("Forensice Management System");
+        help.clear_screen();
+        help.print_label("Welcome");
+        help.print_label("Forensice Management System");
         System.out.println();
         System.out.print("Enter the Username: ");
         this.user_name = in.next();
         in.nextLine();
         System.out.print("Enter the Password: ");
+        
         this.password = in.next();
     }   
 
 
     public Boolean check_password() {
-        handle_dbms dbms = new handle_dbms();
         ArrayList<String[]> user_data = dbms.read("user.csv");
         for (String[] line : user_data) {
             if(line[1].equals(user_name) && line[2].equals(password)) {
-                helper_functions.print_label("Login Successful");
+                help.print_label("Login Successful");
                 this.role = line[3];
                 return true;
             }     
@@ -39,6 +41,7 @@ public class Login {
         System.out.println("Wrong Credentials");
         return false;
     }
+
 
     public void log_out() {
         this.user_name = "";

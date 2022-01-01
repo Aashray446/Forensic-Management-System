@@ -25,7 +25,8 @@ public class Case {
     //
     void dislplay() {
         // Defined some helper functions that would be used everywhere in classes 
-        helper_functions.clear_screen();
+        help = helper_functions.getInstance();
+        help.clear_screen();
         System.out.println("Congratulations, Case had been  ");
         System.out.println( "With Details: - " );
         System.out.println("----------------------------------------------------------------------------------------------------------------");
