@@ -12,6 +12,22 @@ import java.util.ArrayList;
 
 public class handle_dbms {
     
+
+    private handle_dbms(){
+
+    }
+
+    private static handle_dbms instance;
+
+    public static handle_dbms getInstance(){
+        //check whether 1 obj is created or not
+        if(instance == null){
+            instance  = new handle_dbms();
+        }
+        return instance;
+
+    }
+
    public boolean write_to_file(String data, String file_name) {
         try{
             String content = data + "\n";
