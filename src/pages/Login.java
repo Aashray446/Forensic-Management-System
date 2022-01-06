@@ -1,5 +1,6 @@
-package pages.java;
+package pages;
 import java.util.Scanner;
+import java.sql.Time;
 import java.util.ArrayList;
 
 import Helper_class.handle_dbms;
@@ -7,7 +8,7 @@ import Helper_class.helper_functions;
 
 public class Login {
     
-    private String user_name;
+    public String user_name;
     private String password;
     public String  role;
 
@@ -15,7 +16,8 @@ public class Login {
     helper_functions help = helper_functions.getInstance();
     handle_dbms dbms = handle_dbms.getInstance();
 
-    public Login() {
+    
+    public void start() {
         help.clear_screen();
         help.print_label("Welcome");
         help.print_label("Forensice Management System");
@@ -26,8 +28,7 @@ public class Login {
         System.out.print("Enter the Password: ");
         
         this.password = in.next();
-    }   
-
+    }
 
     public Boolean check_password() {
         ArrayList<String[]> user_data = dbms.read("user.csv");
@@ -35,6 +36,7 @@ public class Login {
             if(line[1].equals(user_name) && line[2].equals(password)) {
                 help.print_label("Login Successful");
                 this.role = line[3];
+                this.user_name = line[1];
                 return true;
             }     
         }

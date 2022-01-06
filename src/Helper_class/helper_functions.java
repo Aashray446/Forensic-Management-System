@@ -36,5 +36,14 @@ public class helper_functions {
         System.out.println();
     }
 
+    public void print_function(String[] function_array) {
+        System.out.println("Please Enter the Corresponding Number to Select among the available Functions");
+        for(int i = 0; i < function_array.length; i++) {
+            System.out.print(i); 
+            System.out.print(". ::  ");
+            System.out.print(function_array[i]);
+            System.out.println();
+        }
+    }
 
 }

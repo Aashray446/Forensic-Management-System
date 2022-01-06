@@ -2,31 +2,42 @@ package Main;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import pages.java.ForensicExpert_page;
-import pages.java.Investigator_page;
-import pages.java.Login;
+import pages.Login;
+import pages.Admin_page;
 import Helper_class.handle_dbms;
-
 public class Main {
 
     public static void main(String[] args) {
-      
+        // The Login starts from here
+        // Will keep running on loop until users enter right password
+        Scanner in = new Scanner(System.in);
         Login login_session = new Login();
-
-        login_session.check_password();
+        while(true) {
+            login_session.start();
+             if(login_session.check_password()) {
+                 break;
+             }
+             else {
+                System.out.println("Press Any Key To Try Again");
+                in.nextLine();
+             }
+        }
 
         if (login_session.role.equals("admin")) {
-
+            Admin_page as = new Admin_page();
+            as.start(login_session.user_name);
         }
+
         else if (login_session.role.equals("forensic")) {
-            new ForensicExpert_page().Forensicpage();
-
+           
         }
+
         else if(login_session.role.equals("police")) {
-            new Investigator_page().investigatorPage();
-
+         
         }
+
         else{
           System.out.println("Something went wrong");
         }
