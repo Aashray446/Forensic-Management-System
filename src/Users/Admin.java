@@ -1,65 +1,52 @@
 package Users;
 
 import java.util.ArrayList;
-
-import Helper_class.handle_dbms;
+import java.util.Scanner;
+import Helper_class.*;
+import objects.User;
 
 public class Admin extends User {
 
-    private handle_dbms dbms = handle_dbms.getInstance();
 
-    public void create_new_user(String name, String address, String phone_number, String user_name, String password, String role ) {
+    private helper_functions print_work = helper_functions.getInstance();
+    private Scanner in = new Scanner(System.in);
+    private User user_obj = new User();
 
-    }
 
-    //==================================Available searching methods =======================================================================
-    // By name and By id
-    public String[] search_user_by_name(String name){
-        ArrayList<String[]> user_data = dbms.read("user.csv");
-        for (String[] line : user_data) {
-            if(line[0].equals(name)) {
-            return line;
-            }     
+    public void create_new_user() {
+        print_work.clear_screen();
+        print_work.print_label("Please Enter The User Details");
+        //ASK USERS TO INPUT user_name, password, role, name , address, phone_number serailly
+        //Store that to User class 
+        //Call new save_new_user()
+        System.out.println("Enter the username");
+        user_obj.user_name = in.next();
+        print_work.print_label(" ");
+        System.out.println("Enter the password");
+        user_obj.password = in.next();
+        print_work.print_label(" ");
+        System.out.println("Enter the role");
+        user_obj.role = in.next();
+        if(user_obj.save_new_user()) {
+            print_work.print_label("The USER IS CREATED");
+            print_work.wait_for_user();
         }
-        return String["Error Not Found"];
-    }
-
-    public String[] search_user_by_id(String id){
-        ArrayList<String[]> user_data = dbms.read("user.csv");
-        for (String[] line : user_data) {
-            if(line[0].equals(id)) {
-            return line;
-            }     
+        else{
+            print_work.print_label("THE USER COULDN'T BE CREATED");
+            print_work.wait_for_user();
         }
-        return String["Error Not Found"];
     }
+    private void delete_user() {
 
-    //================================ Deleting methods ================================================================
-    // By name and By Id
-    public boolean delete_user_by_id(String id){
-        ArrayList<String[]> user_data = dbms.read("user.csv");
-        for (int counter = 0; counter < user_data.size(); counter++) { 		      
-            if(user_data.get(counter)[0].equals(id)) {
-                user_data.remove(counter);
-                dbms.append(user_data, "user.csv");
-                return true;
-            }
-        } 
-        return false; 
     }
+    private void change_user_password() {
 
-    public boolean delete_user_by_name(String name){
-        ArrayList<String[]> user_data = dbms.read("user.csv");
-        for (int counter = 0; counter < user_data.size(); counter++) { 		      
-            if(user_data.get(counter)[0].equals(id)) {
-                user_data.remove(counter);
-                return true;
-            }
-        } 
-        return false;
-        dbms.append(user_data, "user.csv");
-    }    
+    }
+    private void display_all_user(){
 
-    
+    }
+    private void search_user_by_name() {
+
+    }
 
 }

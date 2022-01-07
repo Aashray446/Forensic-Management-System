@@ -1,7 +1,9 @@
 package Helper_class;
 
-public class helper_functions {
+import java.util.Scanner;
 
+public class helper_functions {
+    private Scanner in = new Scanner(System.in);
     private helper_functions(){
 
     }
@@ -44,6 +46,22 @@ public class helper_functions {
             System.out.print(function_array[i]);
             System.out.println();
         }
+    }
+
+    public void wait_for_user() {
+        System.out.println("Press any key to Continue");
+        in.nextLine();
+    }
+
+    public void show_exit_option() {
+        System.out.println("100 :: Log Out And Exit");
+    }
+
+    public void exit() {
+        clear_screen();
+        print_label("Thank You For Using Our System");
+        print_label("NAMAH SHIVAYA");
+        System.exit(0);
     }
 
 }

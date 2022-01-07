@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.lang.String;
 
 public class handle_dbms {
     
@@ -18,6 +19,7 @@ public class handle_dbms {
     }
 
     private static handle_dbms instance;
+    private String base_location = "Forensic-Management-System/src/Database/";
 
     public static handle_dbms getInstance(){
         //check whether 1 obj is created or not
@@ -32,7 +34,7 @@ public class handle_dbms {
         try{
             String content = data + "\n";
             //Specify the file name and path here
-            File file =new File(file_name);
+            File file =new File(base_location + file_name);
     
             /* This logic is to create the file if the
              * file is not already present
@@ -60,7 +62,7 @@ public class handle_dbms {
     
     //Reading file
    public ArrayList read(String file_name) {
-        File file = new File(file_name);
+        File file = new File(base_location + file_name);
         BufferedReader bis = null;
         FileReader  fis= null;
         String line = "";
@@ -114,7 +116,7 @@ public class handle_dbms {
         String mycontent = data;
         try {
             //Specify the file path here
-        file = new File(file_name);
+        file = new File(base_location + file_name);
         fos = new FileOutputStream(file);
   
             /* This logic will check whether the file
