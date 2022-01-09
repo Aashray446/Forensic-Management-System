@@ -1,4 +1,4 @@
-package Main_objects.Case;
+package objects.Case;
 
 
 import java.util.ArrayList;
@@ -9,24 +9,6 @@ public class CaseDetails {
     private ArrayList<Integer> people_id;
     private ArrayList<Integer>clues_id;
 
-    void fetch_evidence(){
-
-    }
-    void fetch_people(){
-
-    }
-    void fetch_clue(){
-
-    }
-    void add_or_rem_evidence_id(){
-
-    }
-    void add_or_rem_people_id(){
-
-    }
-    void add_or_rem_clues_id(){
-
-    }
 
     public CaseDetails(String destination, ArrayList<Integer> evidence_id, ArrayList<Integer> people_id, ArrayList<Integer> clues_id) {
         this.destination = destination;

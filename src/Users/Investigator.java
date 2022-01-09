@@ -1,36 +1,36 @@
 package Users;
 
-import Main_objects.Case.Case;
-import Main_objects.Evidence.Evidence;
+import objects.Evidence.Evidence_functions;
+import objects.User;
 
-public class Investigator extends User{
-    Evidence evidence = new Evidence();
-    Case case = new Case();
+public class Investigator extends User {
+    Evidence_functions evidence = new Evidence_functions();
+//    Case case = new Case();
+//
+//    public int getId() {
+//        return id;
+//    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void ViewEvidence(){
-        evidence.ViewEvidence();
-    }
-    public void AddEvidence(){
-        evidence.AddEvidence();
-    }
-    public void UpdateEvidence(){
-        evidence.UpdateEvidence();
-    }
-    public void RemoveEvidences(){
-        evidence.RemoveEvidence();
-    }
-    public void ViewCase(){
-        case.ViewCase();
-    }
-    public void AddCase(){
-        case.AddCase();
-    }
-    public void UpdateCase(){
-        case.UpdateCase();
-    }
+//    public void View_Evidence(){
+//        evidence.ViewEvidence();
+//    }
+//    public void Add_Evidence(){
+//        evidence.AddEvidence();
+//    }
+//    public void Update_Evidence(){
+//        evidence.UpdateEvidence();
+//    }
+//    public void Remove_Evidence(){
+//        evidence.RemoveEvidence();
+//    }
+//    public void View_Case(){
+//        case.ViewCase();
+//    }
+//    public void Add_Case(){
+//        case.AddCase();
+//    }
+//    public void Update_Case(){
+//        case.UpdateCase();
+//    }
     
 }

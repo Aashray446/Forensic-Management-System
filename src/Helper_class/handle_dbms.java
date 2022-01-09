@@ -19,7 +19,7 @@ public class handle_dbms {
     }
 
     private static handle_dbms instance;
-    private String base_location = "Forensic-Management-System/src/Database/";
+    private String base_location = "src/Database/";
 
     public static handle_dbms getInstance(){
         //check whether 1 obj is created or not
@@ -32,7 +32,7 @@ public class handle_dbms {
 
    public boolean write_to_file(String data, String file_name) {
         try{
-            String content = data + "\n";
+            String content = data;
             //Specify the file name and path here
             File file =new File(base_location + file_name);
     
@@ -44,7 +44,7 @@ public class handle_dbms {
             }
     
             //Here true is to append the content to file
-            FileWriter fw = new FileWriter(file,true);
+            FileWriter fw = new FileWriter(file);
             //BufferedWriter writer give better performance
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(content);
@@ -117,7 +117,7 @@ public class handle_dbms {
         try {
             //Specify the file path here
         file = new File(base_location + file_name);
-        fos = new FileOutputStream(file);
+        fos = new FileOutputStream(file,true);
   
             /* This logic will check whether the file
          * exists or not. If the file is not found

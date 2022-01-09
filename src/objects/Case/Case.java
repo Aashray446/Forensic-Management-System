@@ -1,4 +1,4 @@
-package Main_objects.Case;
+package objects.Case;
 
 import Helper_class.helper_functions;
 
@@ -20,10 +20,10 @@ public class Case {
         this.description = description;
         this.case_id = case_id;
         this.added_by_whom = added_by_whom;
-        dislplay();
+        display();
     }
-    //
-    void dislplay() {
+
+    void display() {
         // Defined some helper functions that would be used everywhere in classes 
         helper_functions help = helper_functions.getInstance();
         help.clear_screen();
@@ -33,9 +33,8 @@ public class Case {
         System.out.printf("%10s %20s %20s %20s %20s", "ID", "NAME", "DESCRIPTION", "CASE ID", "ADDED BY WHOM");
         System.out.println();
         System.out.println("--------------------------------------------------------------------------------------------------------------------------");
-            System.out.format("%10s %20s %20s %20s %20s",
-                    this.id, this.name, this.description, this.case_id, this.added_by_whom);
-            System.out.println();
+        System.out.format("%10s %20s %20s %20s %20s", this.id, this.name, this.description, this.case_id, this.added_by_whom);
+        System.out.println();
         System.out.println("----------------------------------------------------------------------------------------------------------------");
     }
 

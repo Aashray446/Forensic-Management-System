@@ -1,4 +1,4 @@
-package Main_objects.Case;
+package objects.Case;
 
 
 public class People {

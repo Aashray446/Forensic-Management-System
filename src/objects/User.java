@@ -1,19 +1,20 @@
 package objects;
-
-import java.security.PublicKey;
 import java.util.ArrayList;
 
 import Helper_class.handle_dbms;
 
 public class User {
     int id;
-   public String user_name;
-   public String password;
-   public String role;
+    public String user_name;
+    public String name;
+    public String address;
+    public String phone_number;
+    public String password;
+    public String role;
     
     //Setup for the the Database
     handle_dbms dbms = handle_dbms.getInstance();
-    private String database_name = "user.csv";
+    private String database_name = "Users.csv";
 
 
     public boolean save_new_user() {
@@ -54,7 +55,7 @@ public class User {
             }
         }
         
-        return new String[] {'N'};
+        return new String[] {String.valueOf('N')};
     }
 
     public boolean delete_user(String name) {
