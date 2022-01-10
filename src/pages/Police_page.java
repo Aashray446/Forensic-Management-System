@@ -44,6 +44,7 @@ public class Police_page {
 
 
     public  void checkChangePassword(){
+        //TODO CHANGE THIS
         Scanner in  = new Scanner(System.in);
         String old_password = print_work.next_line("Enter old password : ");
         if(old_password.equals(investigator.password)){
@@ -53,6 +54,7 @@ public class Police_page {
     }
 
     public void updateProfile(){
+        //TODO THIS ALSO
         Scanner in = new Scanner(System.in);
         String name = investigator.name;
         String address = investigator.address;
