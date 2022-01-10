@@ -1,13 +1,15 @@
 package objects.Case;
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
-import objects.Evidence.Evidence;;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 import java.util.Scanner;
+
+//FUNCTIONS AVAILABLE - ADDCASE, VIEWCASE, UPDATECASE, REMOVECASE
+// TODO -> ???
 
 public class Case_functions {
     handle_dbms dbms = handle_dbms.getInstance();
@@ -51,7 +53,7 @@ public class Case_functions {
         Case CaseObject = new Case(caseid,casename,casedescription,evidence_id,addedby,people_id);
         String content = CaseObject.toString();
         dbms.append(content,"Cases.csv");
-        //sortbyid();
+        sortbyid();
     }
 
     public void ViewCase(){
@@ -61,27 +63,121 @@ public class Case_functions {
         Searchbyid(id);
     }
 
-    public void UpdateEvidence(){
+    public void UpdateCase(){
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Case id : ");
         int id = in.nextInt();
         System.out.println("[1] to change Case name");
         System.out.println("[2] to change Case description");
-        System.out.println("[3] to change added_by");
-        System.out.println("[4] to change time of collection");
-        System.out.println("[5] to change date of collection");
-        System.out.println("[6] to change place of collection");
-        System.out.println("[7] to change collected by");
+        System.out.println("[3] to change added by");
+        System.out.println("[4] to change evidence ids");
+        System.out.println("[5] to change people ids");
         System.out.println("Enter key :");
         int key = in.nextInt();
-        String value = functions.next_line("Enter value to change : ");
+        String value  = new String();
+        ArrayList<Integer> arrvalues = new ArrayList<>();
+        ArrayList<Case> cases = copyObjectFromFile();
+        Case acase = Checkbyid(cases,id);
+        if (key == 4){
+            System.out.println("Enter index to change : ");
+            int index = in.nextInt();
+            arrvalues = acase.getEvidence_id();
+            System.out.println("Enter new id : ");
+            int intvalue = in.nextInt();
+            arrvalues.set(index,intvalue);
+
+        }
+        else if (key ==5){
+            System.out.println("Enter index to change : ");
+            int index = in.nextInt();
+            arrvalues = acase.getPeople_id();
+            System.out.println("Enter new id :");
+            int intvalue = in.nextInt();
+            arrvalues.set(index,intvalue);
+        }
+        else {
+            value = functions.next_line("Enter value to change : ");
+            arrvalues = null;
+        }
         try {
-            //Updatebyid(id,key,value);
+            Updatebyid(id,key,value,arrvalues);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //sortbyid();
+        sortbyid();
 
+    }
+    private void Updatebyid(int id, int key, String value, ArrayList<Integer> arrval) throws IOException {
+        ArrayList<Case> cases = copyObjectFromFile();
+        Case acase = Checkbyid(cases,id);
+        cases.remove(acase);
+        if (acase != null){
+            if (key == 1){
+                acase.setName(value);
+            }
+            else if (key == 2){
+                acase.setDescription(value);
+            }
+            else if (key == 3){
+                acase.setAdded_by(value);
+            }
+            else if (key == 4){
+                acase.setEvidence_id(arrval);
+            }
+            else if (key == 5){
+                acase.setPeople_id(arrval);
+            }
+            else {
+                System.out.println("Wrong input");
+            }
+            cases.add(acase);
+            write(cases);
+        }
+        else {
+            System.out.println("ID not found!");
+        }
+
+    }
+
+    public void RemoveCase(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter Case id : ");
+        int id  = in.nextInt();
+        try {
+            Deletebyid(id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        sortbyid();
+
+    }
+    private void Deletebyid(int id) throws IOException {
+        ArrayList<Case> Cases = copyObjectFromFile();
+        Case acase = Checkbyid(Cases,id);
+        Cases.remove(acase);
+        write(Cases);
+    }
+
+    private void sortbyid(){
+        ArrayList<Case> Cases = copyObjectFromFile();
+        Collections.sort(Cases, Case.StuCaseId);
+        try {
+            write(Cases);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void write(ArrayList<Case> Cases) throws IOException {
+        String content = Cases.get(0).toString();
+        dbms.write_to_file(content,"Cases.csv");
+        if (Cases.size()>1){
+            for (int i = 1; i < Cases.size(); i++) {
+                content = Cases.get(i).toString();
+                dbms.append(content, "Cases.csv");
+            }
+        }
     }
 
     private void Searchbyid(int id) {

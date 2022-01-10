@@ -6,6 +6,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+
+//FUNCTIONS AVAILABLE - ADD, VIEW, UPDATE, REMOVE
+// TODO -> ???
+
 public class Evidence_functions {
 
     handle_dbms dbms = handle_dbms.getInstance();
@@ -28,7 +32,7 @@ public class Evidence_functions {
         String timeofcollection = functions.next_line("Enter Time of collection : ");
         String dateofcollection = functions.next_line("Enter Date of collection : ");
         String placeofcollection = functions.next_line("Enter Place of collection : ");
-        String collectedby = functions.next_line("Enter your name : ");
+        String collectedby = functions.next_line("Enter Collected by: ");
 
         Evidence EvidenceObject = new Evidence(evidenceid,evidencename,evidencedescription,evidencetype,timeofcollection,dateofcollection,placeofcollection,collectedby);
         String content = EvidenceObject.toString();
@@ -39,9 +43,13 @@ public class Evidence_functions {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Evidence id : ");
         int id = in.nextInt();
-        System.out.println("[1] to change Case name");
-        System.out.println("[2] to change Case description");
-        System.out.println("[4] to change collected by");
+        System.out.println("[1] to change Evidence name");
+        System.out.println("[2] to change Evidence description");
+        System.out.println("[3] to change Evidence Type ");
+        System.out.println("[4] to change Time of collection");
+        System.out.println("[5] to change Date of collection");
+        System.out.println("[6] to change Place of collection");
+        System.out.println("[7] to change Collected by");
         System.out.println("Enter key :");
         int key = in.nextInt();
         String value = functions.next_line("Enter value to change : ");
