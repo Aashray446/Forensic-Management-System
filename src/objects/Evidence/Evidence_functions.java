@@ -39,13 +39,9 @@ public class Evidence_functions {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Evidence id : ");
         int id = in.nextInt();
-        System.out.println("[1] to change Evidence name");
-        System.out.println("[2] to change Evidence description");
-        System.out.println("[3] to change Evidence type");
-        System.out.println("[4] to change time of collection");
-        System.out.println("[5] to change date of collection");
-        System.out.println("[6] to change place of collection");
-        System.out.println("[7] to change collected by");
+        System.out.println("[1] to change Case name");
+        System.out.println("[2] to change Case description");
+        System.out.println("[4] to change collected by");
         System.out.println("Enter key :");
         int key = in.nextInt();
         String value = functions.next_line("Enter value to change : ");

@@ -19,7 +19,7 @@ public class User {
 
     public boolean save_new_user() {
         id = 4;
-        if(dbms.write_to_file(convert_to_string(), database_name)){
+        if(dbms.append(convert_to_string(), database_name)){
             return true;
         }
         return false;
@@ -72,7 +72,7 @@ public class User {
     }
 
     private String convert_to_string(){
-        String user_in_string =  '\n' + this.id + ',' + this.user_name + ',' + this.password+ ',' + this.role + '\n';
+        String user_in_string =  String.valueOf(this.id) + ',' + this.user_name + ',' + this.password+ ',' + this.role + '\n';
         return user_in_string;
     }
 

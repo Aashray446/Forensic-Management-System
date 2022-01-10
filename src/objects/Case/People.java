@@ -12,16 +12,17 @@ public class People {
     int added_by;
     String statements_given;
 
-    public void create() {
-        System.out.println("Created");
+    public People(int id, String name, String address, String relation, boolean is_suspect, String reason, String comment, int added_by, String statements_given) {
+        this.id = id;
+        Name = name;
+        Address = address;
+        Relation = relation;
+        this.is_suspect = is_suspect;
+        this.reason = reason;
+        this.comment = comment;
+        this.added_by = added_by;
+        this.statements_given = statements_given;
     }
 
-    public void update() {
-        System.out.println("updated");
-    }
-
-    public void delete() {
-        System.out.println("Delted");
-    }
 
 }
