@@ -43,6 +43,7 @@ public class Forensic_page {
 
 
     public  void checkChangePassword(){
+        //TODO CHANGE THIS METHOD ITS NOT WORKING
         Scanner in  = new Scanner(System.in);
         String old_password = print_work.next_line("Enter old password : ");
         if(old_password.equals(forensic_expert.password)){
@@ -52,6 +53,7 @@ public class Forensic_page {
     }
 
     public void updateProfile(){
+        //TODO CHANGE THIS TOOO
         Scanner in = new Scanner(System.in);
         String name = forensic_expert.name;
         String address = forensic_expert.address;
