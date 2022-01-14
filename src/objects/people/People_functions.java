@@ -78,6 +78,17 @@ public class People_functions {
         sortbyid();
 
     }
+    public boolean checkid(int id){
+        ArrayList<People> person = copyObjectFromFile();
+        People E = Checkbyid(person,id);
+        if (E  ==  null){
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
 
     private void Deletebyid(int id) throws IOException {
         ArrayList<People> people = copyObjectFromFile();

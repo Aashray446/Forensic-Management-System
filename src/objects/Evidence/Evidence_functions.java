@@ -120,6 +120,18 @@ public class Evidence_functions {
 
     }
 
+    public boolean checkid(int id){
+        ArrayList<Evidence> Evidences = copyObjectFromFile();
+        Evidence E = Checkbyid(Evidences,id);
+        if (E  ==  null){
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+
     private void sortbyid(){
         ArrayList<Evidence> Evidences = copyObjectFromFile();
         Collections.sort(Evidences, Evidence.StuEvidenceId);

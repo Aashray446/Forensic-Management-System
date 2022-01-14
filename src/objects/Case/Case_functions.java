@@ -1,6 +1,9 @@
 package objects.Case;
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
+import objects.Evidence.Evidence_functions;
+import objects.people.People_functions;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,6 +17,8 @@ import java.util.Scanner;
 public class Case_functions {
     handle_dbms dbms = handle_dbms.getInstance();
     helper_functions functions = helper_functions.getInstance();
+    Evidence_functions evidence = new Evidence_functions();
+    People_functions person = new People_functions();
 
 
     public void AddCase(){
@@ -28,11 +33,16 @@ public class Case_functions {
             System.out.println("Enter 0 to stop");
             System.out.println("Enter evidence id :");
             int id = in.nextInt();
+            boolean hasid = evidence.checkid(id);
+            if (hasid == true){
+                //TODO remove id being asked in cases and evidences
+                evidence_id.add(id);
+            }
             if (id == 0){
                 break;
             }
-            else{
-                evidence_id.add(id);
+            else {
+                evidence.AddEvidence();
             }
 
         }
@@ -41,6 +51,11 @@ public class Case_functions {
             System.out.println("Enter 0 to stop");
             System.out.println("Enter people id :");
             int id = in.nextInt();
+            boolean hasid = person.checkid(id);
+            if (hasid == true){
+                //TODO remove id being asked in cases and evidences
+                people_id.add(id);
+            }
             if (id == 0){
                 break;
             }
