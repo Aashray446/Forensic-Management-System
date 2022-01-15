@@ -1,4 +1,4 @@
-package Users;
+package objects;
 import java.util.ArrayList;
 
 import Helper_class.handle_dbms;
@@ -18,7 +18,7 @@ public class User {
 
 
     public boolean save_new_user() {
-        id = 4;
+        id = get_next_id();
         if(dbms.append(convert_to_string(), database_name)){
             return true;
         }
@@ -39,10 +39,10 @@ public class User {
         for ( String[] line : user_data) {
             if(line[1].equals(name) ) {
                 line[2] = password;
+                if(dbms.append(dbms.convert_to_string(user_data), database_name)) {
+                    return true;
+                }
             }
-        }
-        if(dbms.append(dbms.convert_to_string(user_data), database_name)) {
-            return true;
         }
         return false;
     }
@@ -70,6 +70,14 @@ public class User {
         }
         return false;
     }
+
+
+    private int get_next_id() {
+        ArrayList<String[]> user_data = dbms.read(database_name);
+        int i = user_data.size() - 1;
+        return Integer.parseInt(user_data.get(i)[0]) + 1;
+    }
+
 
     private String convert_to_string(){
         String user_in_string =  String.valueOf(this.id) + ',' + this.user_name + ',' + this.password+ ',' + this.role + '\n';
