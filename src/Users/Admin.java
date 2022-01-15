@@ -36,17 +36,37 @@ public class Admin extends User {
             print_work.wait_for_user();
         }
     }
-    private void delete_user() {
 
+    //--------------------------------------DELETE USER-----------------------------------------------------------//
+    public void delete_user() {
+        System.out.println("Enter the user_name of the person you want to delete");
+        if(user_obj.delete_user(in.next())) {
+            System.out.println("User successfully deleted");
+        }
+        else {
+            System.out.println("User Not Found");
+        }
     }
+   
+    // -------------------------------------CHANGE USER PASSWORD-----------------------------------------------------------//    
     private void change_user_password() {
-
+        
     }
-    private void display_all_user(){
-
+    // ---------------------------------------DISPLAY ALL USERS----------------------------------------------------------//
+    public void display_all_user(){
+        ArrayList<String[]> user_data = user_obj.get_all_user();
+        for (String[] line : user_data) {
+            System.out.println(line[0] + ',' + line[1] + ',' + line[3]);
+        }
+        print_work.wait_for_user();
+        print_work.clear_screen();
     }
+
+    // -------------------------------------------SEARCH MY NAME------------------------------------------------------//
+
     private void search_user_by_name() {
 
     }
+
 
 }

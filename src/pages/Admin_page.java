@@ -54,7 +54,7 @@ public class Admin_page {
             }
 
             if(current_choice==3) {
-                System.out.println("aDsdo Seomthing_!1");
+                admin.display_all_user();
             }
 
             if(current_choice==4) {

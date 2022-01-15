@@ -44,13 +44,6 @@ public class Login {
         return false;
     }
 
-
-    public void log_out() {
-        this.user_name = "";
-        this.password = "";
-        this.role = "";
-
-    }
     
 
 }

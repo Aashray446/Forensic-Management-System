@@ -70,11 +70,16 @@ public class User {
         return false;
     }
 
+    public ArrayList<String[]> get_all_user() {
+        return dbms.read(database_name);
+    }
+
+
     private String convert_to_string(){
-        String user_in_string =  '\n' + this.id + ',' + this.user_name + ',' + this.password+ ',' + this.role + '\n';
+        String user_in_string =  String.valueOf(this.id) + ',' + this.user_name + ',' + this.password+  ',' + this.role;
         return user_in_string;
     }
 
-    
+
     
 }
