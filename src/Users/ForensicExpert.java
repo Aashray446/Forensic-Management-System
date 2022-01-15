@@ -1,34 +1,37 @@
 package Users;
 
-import Main_objects.Evidence.Evidence;
-import Main_objects.Case.Case;
+import objects.Case.Case_functions;
+import objects.Evidence.Evidence_functions;
+import objects.people.People_functions;
+
 
 public class ForensicExpert extends User {
 
-    Evidence evidence = new Evidence();
-    Case case = new Case();
+    Evidence_functions evidence = new Evidence_functions();
+    Case_functions acase = new Case_functions();
+    People_functions person = new People_functions();
 
 
-    public void ViewEvidence(){
+    public void View_Evidence(){
         evidence.ViewEvidence();
     }
-    public void AddEvidence(){
+    public void Add_Evidence(){
         evidence.AddEvidence();
     }
-    public void UpdateEvidence(){
+    public void Update_Evidence(){
         evidence.UpdateEvidence();
     }
-    public void DeleteEvidence(){
-        evidence.RemoveEvidences();
+    public void View_Case(){
+        acase.ViewCase();
     }
-    public void ViewCase(){
-        case.ViewCase();
+    public void Add_Case(){
+        acase.AddCase();
     }
-    public void AddCase(){
-        case.AddCase();
+    public void Update_Case(){
+        acase.UpdateCase();
     }
-    public void UpdateCase(){
-        case.UpdateCase();
+    public void View_People(){
+        person.ViewPeople();
     }
 
 }

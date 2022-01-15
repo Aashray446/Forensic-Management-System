@@ -1,4 +1,4 @@
-package objects;
+package Users;
 import java.util.ArrayList;
 
 import Helper_class.handle_dbms;
@@ -71,20 +71,11 @@ public class User {
         return false;
     }
 
-    public ArrayList<String[]> get_all_user() {
-        return dbms.read(database_name);
-    }
-
-
     private String convert_to_string(){
-<<<<<<< HEAD
-        String user_in_string =  String.valueOf(this.id) + ',' + this.user_name + ',' + this.password+  ',' + this.role;
-=======
         String user_in_string =  String.valueOf(this.id) + ',' + this.user_name + ',' + this.password+ ',' + this.role + '\n';
->>>>>>> 495e534d1bc4e9cbeff1ee566582142ad3f8f416
         return user_in_string;
     }
 
-
+    
     
 }

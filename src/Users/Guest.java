@@ -1,19 +1,18 @@
-package User;
+package Users;
 
-import Main_objects.Case.Case;
-import Main_objects.Evidence.Evidence;
-import Users.User;
+import objects.Case.Case_functions;
+import objects.Evidence.Evidence_functions;
 
-public class Guest extends User{
-    Evidence evidence = new Evidence();
-    Case case = new Case();
+public class Guest extends User {
+    Evidence_functions evidence = new Evidence_functions();
+    Case_functions acase = new Case_functions();
 
 
     public void ViewEvidence(){
         evidence.ViewEvidence();
     }
     public void ViewCase(){
-        case.ViewCase();
+        acase.ViewCase();
     }
     
 }

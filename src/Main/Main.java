@@ -1,12 +1,12 @@
 package Main;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+import pages.Forensic_page;
 import pages.Login;
 import pages.Admin_page;
-import Helper_class.handle_dbms;
+
+
 public class Main {
 
     public static void main(String[] args) {
@@ -31,7 +31,8 @@ public class Main {
         }
 
         else if (login_session.role.equals("forensic")) {
-           
+            Forensic_page as = new Forensic_page();
+            as.start(login_session.user_name);
         }
 
         else if(login_session.role.equals("police")) {

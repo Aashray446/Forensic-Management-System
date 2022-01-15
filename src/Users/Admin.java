@@ -1,9 +1,7 @@
 package Users;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import Helper_class.*;
-import objects.User;
 
 public class Admin extends User {
 

@@ -31,7 +31,7 @@ public class Login {
     }
 
     public Boolean check_password() {
-        ArrayList<String[]> user_data = dbms.read("user.csv");
+        ArrayList<String[]> user_data = dbms.read("Users.csv");
         for (String[] line : user_data) {
             if(line[1].equals(user_name) && line[2].equals(password)) {
                 help.print_label("Login Successful");

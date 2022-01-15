@@ -64,4 +64,12 @@ public class helper_functions {
         System.exit(0);
     }
 
+    public String next_line(String ask){
+        String get = "";
+        System.out.println(ask);
+        Scanner input = new Scanner(System.in);
+        get = input.nextLine();
+        return get;
+    }
+
 }
