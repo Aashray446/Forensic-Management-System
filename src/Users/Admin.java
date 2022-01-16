@@ -9,24 +9,32 @@ public class Admin extends User {
 
     private helper_functions print_work = helper_functions.getInstance();
     private Scanner in = new Scanner(System.in);
-    private User user_obj = new User();
 
 
     public void create_new_user() {
         print_work.clear_screen();
         print_work.print_label("Please Enter The User Details");
         //ASK USERS TO INPUT user_name, password, role, name , address, phone_number serailly
-        //Store that to User class 
         //Call new save_new_user()
         System.out.println("Enter the username");
-        user_obj.user_name = in.next();
+        super.user_name = in.next();
         print_work.print_label(" ");
         System.out.println("Enter the password");
-        user_obj.password = in.next();
+        super.password = in.next();
         print_work.print_label(" ");
         System.out.println("Enter the role");
-        user_obj.role = in.next();
-        if(user_obj.save_new_user()) {
+        super.role = in.next();
+        System.out.println("Enter the Name");
+        super.name = in.next();
+        print_work.print_label(" ");
+        System.out.println("Enter the Address");
+        super.address = in.next();
+        print_work.print_label(" ");
+        System.out.println("Enter the phone number");
+        super.phone_number = in.next();
+        
+
+        if(super.save_new_user()) {
             print_work.print_label("The USER IS CREATED");
             print_work.wait_for_user();
         }
@@ -39,7 +47,7 @@ public class Admin extends User {
     //--------------------------------------DELETE USER-----------------------------------------------------------//
     public void delete_user() {
         System.out.println("Enter the user_name of the person you want to delete");
-        if(user_obj.delete_user(in.next())) {
+        if(super.delete_user(in.next())) {
             System.out.println("User successfully deleted");
         }
         else {
@@ -67,7 +75,7 @@ public class Admin extends User {
     }
     // ---------------------------------------DISPLAY ALL USERS----------------------------------------------------------//
     public void display_all_user(){
-        ArrayList<String[]> user_data = user_obj.get_all_user();
+        ArrayList<String[]> user_data = super.get_all_user();
         for (String[] line : user_data) {
             System.out.println(line[0] + ", " + line[1] + ", " + line[3]);
         }

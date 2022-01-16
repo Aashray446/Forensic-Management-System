@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import pages.Forensic_page;
 import pages.Login;
+import pages.Police_page;
 import pages.Admin_page;
 
 
@@ -36,7 +37,8 @@ public class Main {
         }
 
         else if(login_session.role.equals("police")) {
-         
+            Police_page as = new Police_page();
+            as.start(login_session.user_name);
         }
 
         else{

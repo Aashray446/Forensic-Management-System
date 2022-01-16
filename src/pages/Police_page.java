@@ -44,8 +44,8 @@ public class Police_page {
 
 
     public  void checkChangePassword(){
-        //TODO CHANGE THIS
         Scanner in  = new Scanner(System.in);
+        investigator.set_current_user(user_name);
         String old_password = print_work.next_line("Enter old password : ");
         if(old_password.equals(investigator.password)){
             String new_password = print_work.next_line("Enter new password : ");
@@ -54,8 +54,8 @@ public class Police_page {
     }
 
     public void updateProfile(){
-        //TODO THIS ALSO
         Scanner in = new Scanner(System.in);
+        investigator.set_current_user(user_name);
         String name = investigator.name;
         String address = investigator.address;
         String phone_number = investigator.phone_number;
@@ -79,7 +79,16 @@ public class Police_page {
                 break;
             }
         }
-        investigator.update_user(name,address,phone_number, investigator.password);
+        if(investigator.update_user(name,address,phone_number)) {
+            System.out.println("The Data has been updated");
+            print_work.wait_for_user();
+            print_work.clear_screen();
+        }
+        else {
+            System.out.println("There is something wrong");
+            print_work.wait_for_user();
+            print_work.clear_screen();
+        }
     }
 
     //Showing the options and taking input from the User

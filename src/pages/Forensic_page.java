@@ -42,22 +42,28 @@ public class Forensic_page {
 
 
     public  void checkChangePassword(){
-        //TODO CHANGE THIS METHOD ITS NOT WORKING
         Scanner in  = new Scanner(System.in);
-        String old_password = print_work.next_line("Enter old password : ");
-        if(old_password.equals(forensic_expert.password)){
-            String new_password = print_work.next_line("Enter new password : ");
-            forensic_expert.change_password(this.user_name,new_password);
+        String new_password = print_work.next_line("Enter new password : ");
+        if(forensic_expert.change_password(this.user_name,new_password)) {
+            System.out.println("The Password Has Been Sucessfully Changed");
+            print_work.wait_for_user();
+            print_work.clear_screen();
+        }
+        else {
+            System.out.println("Sorry , Something went Wrong Try again");
+            print_work.wait_for_user();
+            print_work.clear_screen();
         }
     }
 
     public void updateProfile(){
-        //TODO CHANGE THIS TOOO
         Scanner in = new Scanner(System.in);
+        forensic_expert.set_current_user(user_name);
         String name = forensic_expert.name;
         String address = forensic_expert.address;
         String phone_number = forensic_expert.phone_number;
         while (true){
+            print_work.clear_screen();
             System.out.println("Enter [1] to change name");
             System.out.println("Enter [2] to change address");
             System.out.println("Enter [3] to change phone number");
@@ -77,7 +83,16 @@ public class Forensic_page {
                 break;
             }
         }
-        forensic_expert.update_user(name,address,phone_number,forensic_expert.password);
+        if(forensic_expert.update_user(name,address,phone_number)) {
+            System.out.println("The User Details has been updated");
+            print_work.wait_for_user();
+            print_work.clear_screen();
+        }
+        else {
+            System.out.println("Sorry Something Went Wrong");
+            print_work.wait_for_user();
+            print_work.clear_screen();
+        }
     }
 
     //Showing the options and taking input from the User
