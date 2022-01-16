@@ -46,11 +46,11 @@ public class Admin_page {
             }
 
             if(current_choice==1) {
-                System.out.println("Do Seomtasdhing_!1");
+                admin.change_user_password();
             }
 
             if(current_choice==2) {
-                System.out.println("Do Sasdeomthing_!1");
+                admin.delete_user();
             }
 
             if(current_choice==3) {
@@ -58,7 +58,7 @@ public class Admin_page {
             }
 
             if(current_choice==4) {
-
+                admin.search_user_by_name();
             }
 
             if(current_choice == 100) {

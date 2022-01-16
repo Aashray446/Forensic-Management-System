@@ -5,7 +5,6 @@ import Helper_class.helper_functions;
 import Users.ForensicExpert;
 
 import java.util.Scanner;
-import java.util.logging.SocketHandler;
 
 public class Forensic_page {
 

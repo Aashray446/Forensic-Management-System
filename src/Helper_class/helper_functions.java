@@ -1,9 +1,11 @@
 package Helper_class;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class helper_functions {
     private Scanner in = new Scanner(System.in);
+    private handle_dbms dbms = handle_dbms.getInstance();
     private helper_functions(){
 
     }
@@ -70,6 +72,12 @@ public class helper_functions {
         Scanner input = new Scanner(System.in);
         get = input.nextLine();
         return get;
+    }
+
+    public int get_id(String file_name){
+        ArrayList<String[]> user_data = dbms.read(file_name);
+        int i = user_data.size() - 1;
+        return Integer.parseInt(user_data.get(i)[0]) + 1;
     }
 
 }

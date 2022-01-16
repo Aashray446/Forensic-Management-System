@@ -45,17 +45,31 @@ public class Admin extends User {
         else {
             System.out.println("User Not Found");
         }
+        print_work.wait_for_user();
+        print_work.clear_screen();
     }
    
     // -------------------------------------CHANGE USER PASSWORD-----------------------------------------------------------//    
-    private void change_user_password() {
-        
+    public void change_user_password() {
+        print_work.clear_screen();
+        System.out.println("Enther the user_name of the person");
+        String name = in.next();
+        System.out.println("Enter the password u want to change");
+        String password = in.next();
+        if(super.change_password(name, password)) {
+            System.out.println("The password is sucessfully changed");
+        }
+        else {
+            System.out.println("The User is not found");
+        }
+        print_work.wait_for_user();
+        print_work.clear_screen();
     }
     // ---------------------------------------DISPLAY ALL USERS----------------------------------------------------------//
     public void display_all_user(){
         ArrayList<String[]> user_data = user_obj.get_all_user();
         for (String[] line : user_data) {
-            System.out.println(line[0] + ',' + line[1] + ',' + line[3]);
+            System.out.println(line[0] + ", " + line[1] + ", " + line[3]);
         }
         print_work.wait_for_user();
         print_work.clear_screen();
@@ -63,7 +77,23 @@ public class Admin extends User {
 
     // -------------------------------------------SEARCH MY NAME------------------------------------------------------//
 
-    private void search_user_by_name() {
+    public void search_user_by_name() {
+        print_work.print_label("Enter the username of the User");
+        String name = in.next();
+        String[] user_data = super.search_user_by_name(name);
+        if(user_data.length > 2) {
+            for(int i = 1; i < user_data.length; i++ ) {
+                System.out.print(user_data[i]);
+                System.out.print(", ");
+            }
+            print_work.wait_for_user();
+            print_work.clear_screen();
+        }
+        else {
+            print_work.print_label("User not found");
+            print_work.wait_for_user();
+            print_work.clear_screen();
+        }
 
     }
 
