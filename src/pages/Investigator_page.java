@@ -1,8 +1,7 @@
-
+package pages;
 import java.util.Scanner;
-
 import Helper_class.helper_functions;
-import Users.Admin;
+
 
 public class Investigator_page {
     
@@ -21,11 +20,11 @@ public class Investigator_page {
     private int current_choice = -1;
     //Start
     public void start(String user_name) {
-        this.user_name = user_name;
+        //TODO this.user_name = user_name;
         print_work.wait_for_user();
         print_work.clear_screen();
         print_work.print_label("Welcome To Admin Control Panel");
-        print_work.print_label(this.user_name);
+        //TODO print_work.print_label(this.user_name);
         System.out.println();
         home_page();
     }
@@ -39,7 +38,7 @@ public class Investigator_page {
         
             //Selection Based on choices
             if(current_choice==0) {
-                admin.create_new_user();
+                //TODO BUG admin.create_new_user();
             }
 
             if(current_choice==1) {
@@ -51,7 +50,7 @@ public class Investigator_page {
             }
 
             if(current_choice==3) {
-                admin.display_all_user();
+                //TODO bug here use some instance of admin or make a class admin admin.display_all_user();
             }
 
             if(current_choice==4) {
