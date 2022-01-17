@@ -106,6 +106,6 @@ public class Case {
             }
 
         }
-        return id+","+name+","+description+","+evid+","+added_by+","+peid+"\n";
+        return id+","+name+","+description+","+evid+","+added_by+","+peid+",\n";
     }
 }

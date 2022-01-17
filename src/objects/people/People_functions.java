@@ -23,7 +23,7 @@ public class People_functions {
         Searchbyid(id);
     }
 
-    public void AddPeople() {
+    public People AddPeople() {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter id : ");
         int id = in.nextInt();
@@ -40,6 +40,7 @@ public class People_functions {
         String content = PeopleObject.toString();
         dbms.append(content, "People.csv");
         sortbyid();
+        return PeopleObject;
     }
 
     public void UpdatePeople() {
@@ -88,6 +89,9 @@ public class People_functions {
             return true;
         }
 
+    }
+    public int giveid(People person){
+        return person.getId();
     }
 
     private void Deletebyid(int id) throws IOException {
@@ -190,15 +194,17 @@ public class People_functions {
     }
 
     private void print(People PeopleObject) {
-        System.out.println("People id : " + PeopleObject.getId());
-        System.out.println("People name : " + PeopleObject.getName());
-        System.out.println("People address : " + PeopleObject.getAddress());
-        System.out.println("People description : " + PeopleObject.getDescription());
-        System.out.println("People category  : " + PeopleObject.getCategory());
-        System.out.println("Reason : " + PeopleObject.getReason());
-        System.out.println("Comment : " + PeopleObject.getComment());
-        System.out.println("Added by : " + PeopleObject.getAdded_by());
-        System.out.println("Statements given" + PeopleObject.getStatements_given());
+        System.out.println();
+        System.out.println("People id           : " + PeopleObject.getId());
+        System.out.println("People name         : " + PeopleObject.getName());
+        System.out.println("People address      : " + PeopleObject.getAddress());
+        System.out.println("People description  : " + PeopleObject.getDescription());
+        System.out.println("People category     : " + PeopleObject.getCategory());
+        System.out.println("Reason              : " + PeopleObject.getReason());
+        System.out.println("Comment             : " + PeopleObject.getComment());
+        System.out.println("Added by            : " + PeopleObject.getAdded_by());
+        System.out.println("Statements given    : " + PeopleObject.getStatements_given());
+        System.out.println();
     }
 
 }

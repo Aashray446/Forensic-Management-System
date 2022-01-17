@@ -97,7 +97,7 @@ public class Evidence {
     };
     @Override
     public String toString() {
-        return evidenceid +"," +evidencename + ","+evidencedescription +"," +evidencetype +"," +timeofcollection + ","+dateofcollection +","+ placeofcollection +","+ collectedby+"\n";
+        return evidenceid +"," +evidencename + ","+evidencedescription +"," +evidencetype +"," +timeofcollection + ","+dateofcollection +","+ placeofcollection +","+ collectedby+",\n";
     }
 
 

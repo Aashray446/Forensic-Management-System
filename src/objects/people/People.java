@@ -108,6 +108,6 @@ public class People {
     };
     @Override
     public String toString() {
-        return id +","+Name+","+Address+ ","+Description +"," + category +"," +reason+ ","+comment+","+ added_by+","+ statements_given+"\n";
+        return id +","+Name+","+Address+ ","+Description +"," + category +"," +reason+ ","+comment+","+ added_by+","+ statements_given+",\n";
     }
 }

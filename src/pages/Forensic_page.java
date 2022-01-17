@@ -44,7 +44,7 @@ public class Forensic_page {
     public  void checkChangePassword(){
         Scanner in  = new Scanner(System.in);
         String new_password = print_work.next_line("Enter new password : ");
-        if(forensic_expert.change_password(this.user_name,new_password)) {
+        if (forensic_expert.change_password(this.user_name,new_password)) {
             System.out.println("The Password Has Been Sucessfully Changed");
             print_work.wait_for_user();
             print_work.clear_screen();

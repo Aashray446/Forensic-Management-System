@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-//FUNCTIONS AVAILABLE - ADD, VIEW, UPDATE, REMOVE
-// TODO -> ???
 
 public class Evidence_functions {
 
@@ -22,10 +20,11 @@ public class Evidence_functions {
         Searchbyid(id);
     }
 
-    public void AddEvidence(){
+    public Evidence AddEvidence(){
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter id : ");
-        int evidenceid = in.nextInt();
+        functions.clear_screen();
+        System.out.println("Please Enter the following details to add new Evidence");
+        int evidenceid = functions.get_id("Evidences.csv");
         String evidencename = functions.next_line("Enter evidence name : ");
         String evidencedescription = functions.next_line("Enter evidence Description : ");
         String evidencetype = functions.next_line("Enter evidence Type : ");
@@ -33,11 +32,11 @@ public class Evidence_functions {
         String dateofcollection = functions.next_line("Enter Date of collection : ");
         String placeofcollection = functions.next_line("Enter Place of collection : ");
         String collectedby = functions.next_line("Enter Collected by: ");
-
         Evidence EvidenceObject = new Evidence(evidenceid,evidencename,evidencedescription,evidencetype,timeofcollection,dateofcollection,placeofcollection,collectedby);
         String content = EvidenceObject.toString();
         dbms.append(content,"Evidences.csv");
         sortbyid();
+        return EvidenceObject;
     }
     public void UpdateEvidence(){
         Scanner in = new Scanner(System.in);
@@ -120,6 +119,10 @@ public class Evidence_functions {
 
     }
 
+    public int giveid(Evidence evidence){
+        return evidence.getEvidenceid();
+    }
+
     public boolean checkid(int id){
         ArrayList<Evidence> Evidences = copyObjectFromFile();
         Evidence E = Checkbyid(Evidences,id);
@@ -191,14 +194,16 @@ public class Evidence_functions {
 
     }
     private void print(Evidence evidencePropertiesObject) {
-        System.out.println("Evidence id : "+evidencePropertiesObject.getEvidenceid());
-        System.out.println("Evidence name : "+evidencePropertiesObject.getEvidencename());
-        System.out.println("Evidence type : "+evidencePropertiesObject.getEvidencetype());
+        System.out.println();
+        System.out.println("Evidence id          : "+evidencePropertiesObject.getEvidenceid());
+        System.out.println("Evidence name        : "+evidencePropertiesObject.getEvidencename());
+        System.out.println("Evidence type        : "+evidencePropertiesObject.getEvidencetype());
         System.out.println("Evidence description : "+evidencePropertiesObject.getEvidencedescription());
-        System.out.println("Time of collection  : "+evidencePropertiesObject.getTimeofcollection());
-        System.out.println("Date of collection : "+evidencePropertiesObject.getDateofcollection());
-        System.out.println("Place of collection : "+evidencePropertiesObject.getDateofcollection());
-        System.out.println("Collected by : "+evidencePropertiesObject.getCollectedby());
+        System.out.println("Time of collection   : "+evidencePropertiesObject.getTimeofcollection());
+        System.out.println("Date of collection   : "+evidencePropertiesObject.getDateofcollection());
+        System.out.println("Place of collection  : "+evidencePropertiesObject.getDateofcollection());
+        System.out.println("Collected by         : "+evidencePropertiesObject.getCollectedby());
+        System.out.println();
     }
 
 }

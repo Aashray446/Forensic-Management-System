@@ -68,7 +68,7 @@ public class helper_functions {
 
     public String next_line(String ask){
         String get = "";
-        System.out.println(ask);
+        System.out.print(ask);
         Scanner input = new Scanner(System.in);
         get = input.nextLine();
         return get;

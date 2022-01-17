@@ -1,7 +1,9 @@
 package objects.Case;
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
+import objects.Evidence.Evidence;
 import objects.Evidence.Evidence_functions;
+import objects.people.People;
 import objects.people.People_functions;
 
 import java.io.BufferedReader;
@@ -11,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-//FUNCTIONS AVAILABLE - ADDCASE, VIEWCASE, UPDATECASE, REMOVECASE
-// TODO -> ???
 
 public class Case_functions {
     handle_dbms dbms = handle_dbms.getInstance();
@@ -23,26 +23,32 @@ public class Case_functions {
 
     public void AddCase(){
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter Case id : ");
-        int caseid = in.nextInt();
+        int caseid = functions.get_id("Cases.csv");
         String casename = functions.next_line("Enter case name : ");
         String casedescription = functions.next_line("Enter case Description : ");
         String addedby = functions.next_line("Enter your name : ");
         ArrayList<Integer> evidence_id = new ArrayList<>();
+        System.out.println("Enter evidence id");
         while (true){
             System.out.println("Enter 0 to stop");
-            System.out.println("Enter evidence id :");
+            System.out.print("Enter evidence id :");
             int id = in.nextInt();
             boolean hasid = evidence.checkid(id);
-            if (hasid == true){
-                //TODO remove id being asked in cases and evidences
-                evidence_id.add(id);
-            }
             if (id == 0){
                 break;
             }
+            else if (hasid == true){
+                //TODO check if the id already present in the case
+                evidence_id.add(id);
+            }
             else {
-                evidence.AddEvidence();
+                System.out.println("ID entered is not valid!");
+                System.out.println("Enter [1] to add new evidence");
+                int opt = in.nextInt();
+                if (opt==1){
+                    Evidence newevd = evidence.AddEvidence();
+                    evidence_id.add(evidence.giveid(newevd));
+                }
             }
 
         }
@@ -52,15 +58,21 @@ public class Case_functions {
             System.out.println("Enter people id :");
             int id = in.nextInt();
             boolean hasid = person.checkid(id);
-            if (hasid == true){
-                //TODO remove id being asked in cases and evidences
-                people_id.add(id);
-            }
             if (id == 0){
                 break;
             }
-            else{
+            else if (hasid == true){
+                //TODO check if the id already present in the case
                 people_id.add(id);
+            }
+            else {
+                System.out.println("ID entered is not valid!");
+                System.out.println("Enter [1] to add new person");
+                int opt = in.nextInt();
+                if (opt==1){
+                    People newperson = person.AddPeople();
+                    people_id.add(person.giveid(newperson));
+                }
             }
 
         }
@@ -122,6 +134,19 @@ public class Case_functions {
         sortbyid();
 
     }
+
+    //TODO check if the id already present in the case
+    //    private boolean checkevidpeid(int cid,int id, char c){
+    //        ArrayList<Case> cases = copyObjectFromFile();
+    //        Case acase = Checkbyid(cases,cid);
+    //        if (c == 'e'){
+    //            acase
+    //        }
+    //        else if (c == 'p'){
+    //        }
+    //    }
+
+
     private void Updatebyid(int id, int key, String value, ArrayList<Integer> arrval) throws IOException {
         ArrayList<Case> cases = copyObjectFromFile();
         Case acase = Checkbyid(cases,id);
@@ -241,12 +266,14 @@ public class Case_functions {
 
     }
     private void print(Case CaseObject) {
-        System.out.println("Case id : "+CaseObject.getId());
-        System.out.println("Case name : "+CaseObject.getName());
+        System.out.println();
+        System.out.println("Case id          : "+CaseObject.getId());
+        System.out.println("Case name        : "+CaseObject.getName());
         System.out.println("Case description : "+CaseObject.getDescription());
-        System.out.println("Collected by : "+CaseObject.getAdded_by());
-        System.out.println("Evidence ids : "+CaseObject.getEvidence_id());
-        System.out.println("People ids :  "+CaseObject.getPeople_id());
+        System.out.println("Collected by     : "+CaseObject.getAdded_by());
+        System.out.println("Evidence ids     : "+CaseObject.getEvidence_id());
+        System.out.println("People ids       : "+CaseObject.getPeople_id());
+        System.out.println();
     }
 
 }
