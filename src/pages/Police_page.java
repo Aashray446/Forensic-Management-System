@@ -131,7 +131,9 @@ public class Police_page {
                 checkChangePassword();
             } else if (current_choice == 13) {
                 updateProfile();
-            } else if (current_choice == 100) {
+            } else if(current_choice == 100) {
+                print_work.logout();
+            } else if(current_choice==101) {
                 print_work.exit();
             } else {
                 System.out.println("Wrong Choice, try again!");

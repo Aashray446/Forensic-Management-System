@@ -52,8 +52,10 @@ public class Admin_page {
             } else if(current_choice==4) {
                 admin.search_user_by_name();
             } else if(current_choice == 100) {
+                print_work.logout();
+            }else if(current_choice==101) {
                 print_work.exit();
-            }else {
+            }else{
                 System.out.println("Wrong Choice, try again!");
             }
 
