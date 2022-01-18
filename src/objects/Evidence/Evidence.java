@@ -95,6 +95,15 @@ public class Evidence {
 
         }
     };
+//    public static Comparator<Evidence> StuDateofcollection = new Comparator<>() {
+//
+//        public int compare(Evidence s1, Evidence s2) {
+//            String Date1 = s1.getDateofcollection().toUpperCase();
+//            String Date2 = s2.getDateofcollection().toUpperCase();
+//            return Date1.compareTo(Date2);
+//
+//        }
+//    };
     @Override
     public String toString() {
         return evidenceid +"," +evidencename + ","+evidencedescription +"," +evidencetype +"," +timeofcollection + ","+dateofcollection +","+ placeofcollection +","+ collectedby+"\n";

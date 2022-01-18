@@ -1,10 +1,12 @@
 package objects.Evidence;
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
+import objects.Case.Case;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -14,11 +16,42 @@ public class Evidence_functions {
     helper_functions functions = helper_functions.getInstance();
 
     public void ViewEvidence(){
-        functions.clear_screen();
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter Evidence id : ");
-        int id = in.nextInt();
-        Searchbyid(id);
+        functions.clear_screen();
+        while (true){
+            System.out.println("[1] to view case by id");
+            System.out.println("[2] to view all case");
+            System.out.println("[3] to view by date");
+            System.out.println("[4] to view by type");
+            System.out.println("[0] to stop");
+            int opt = in.nextInt();
+            if (opt==1){
+                System.out.println("Enter Evidence id : ");
+                int id = in.nextInt();
+                Searchbyid(id);
+            }
+            else if (opt==2){
+                viewall();
+
+            }
+            else if(opt==3){
+                System.out.print("Enter date (format : DD-MM-YYYY) : ");
+                String date = in.next();
+                viewbydate(date);
+            }
+            else if(opt==4){
+                System.out.print("Enter type : ");
+                String type = in.next();
+                viewbytype(type);
+            }
+            else if(opt==0){
+                break;
+            }
+            else{
+                System.out.println("Wrong Choice !");
+            }
+
+        }
     }
 
     public Evidence AddEvidence(){
@@ -127,8 +160,31 @@ public class Evidence_functions {
 
     }
 
-    public int giveid(Evidence evidence){
-        return evidence.getEvidenceid();
+    private void viewall(){
+        ArrayList<Evidence> objects = copyObjectFromFile();
+        for (int i = 0; i < objects.size(); i++) {
+            print(objects.get(i));
+        }
+
+    }
+
+    private void viewbydate(String d){
+        ArrayList<Evidence> objects = copyObjectFromFile();
+        System.out.println(" ");
+        for (int i = 0; i < objects.size(); i++) {
+            if (objects.get(i).getDateofcollection().equals(d)) {
+                print(objects.get(i));
+            }
+        }
+    }
+    private void viewbytype(String t){
+        ArrayList<Evidence> objects = copyObjectFromFile();
+        System.out.println(" ");
+        for (int i = 0; i < objects.size(); i++) {
+            if ((objects.get(i).getEvidencetype().toUpperCase().trim()).equals(t.toUpperCase().trim())) {
+                print(objects.get(i));
+            }
+        }
     }
 
     public boolean checkid(int id){

@@ -2,6 +2,7 @@ package objects.people;
 
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
+import objects.Case.Case;
 import objects.Evidence.Evidence;
 
 import java.io.BufferedReader;
@@ -17,11 +18,30 @@ public class People_functions {
     helper_functions functions = helper_functions.getInstance();
 
     public void ViewPeople() {
-        functions.clear_screen();
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter People id : ");
-        int id = in.nextInt();
-        Searchbyid(id);
+        functions.clear_screen();
+        while (true){
+            System.out.println("[1] to view case by id");
+            System.out.println("[2] to view all case");
+            System.out.println("[0] to stop");
+            int opt = in.nextInt();
+            if (opt==1){
+                System.out.println("Enter People id : ");
+                int id = in.nextInt();
+                Searchbyid(id);
+            }
+            else if (opt==2){
+                viewall();
+
+            }
+            else if(opt==0){
+                break;
+            }
+            else{
+                System.out.println("Wrong Choice !");
+            }
+
+        }
     }
 
     public People AddPeople() {
@@ -93,8 +113,13 @@ public class People_functions {
         }
 
     }
-    public int giveid(People person){
-        return person.getId();
+    private void viewall(){
+        ArrayList<People> objects = copyObjectFromFile();
+        for (int i = 0; i < objects.size(); i++) {
+            print(objects.get(i));
+        }
+
+
     }
 
     private void Deletebyid(int id) throws IOException {

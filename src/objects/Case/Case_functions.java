@@ -116,6 +116,9 @@ public class Case_functions {
                 viewall();
 
             }
+            else if(opt==0){
+                break;
+            }
             else{
                 System.out.println("Wrong Choice !");
             }
@@ -200,16 +203,7 @@ public class Case_functions {
     private void viewall(){
         ArrayList<Case> objects = copyObjectFromFile();
         for (int i = 0; i < objects.size(); i++) {
-            functions.print_label("-");
-            System.out.println();
-            System.out.println("Case id          : "+objects.get(i).getId());
-            System.out.println("Case name        : "+objects.get(i).getName());
-            System.out.println("Case description : "+objects.get(i).getDescription());
-            System.out.println("Collected by     : "+objects.get(i).getAdded_by());
-            System.out.println("Evidence ids     : "+objects.get(i).getEvidence_id());
-            System.out.println("People ids       : "+objects.get(i).getPeople_id());
-            System.out.println();
-            functions.print_label("-");
+            print(objects.get(i));
         }
 
 
