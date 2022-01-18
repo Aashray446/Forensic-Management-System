@@ -58,17 +58,17 @@ public class Login {
         }
 
         if (login_session.role.equals("admin")) {
-            Admin_page as = new Admin_page();
+            Page as = new Admin_page();
             as.start(login_session.user_name);
         }
 
         else if (login_session.role.equals("forensic")) {
-            Forensic_page as = new Forensic_page();
+            Page as = new Forensic_page();
             as.start(login_session.user_name);
         }
 
         else if(login_session.role.equals("police")) {
-            Police_page as = new Police_page();
+            Page as = new Police_page();
             as.start(login_session.user_name);
         }
 
