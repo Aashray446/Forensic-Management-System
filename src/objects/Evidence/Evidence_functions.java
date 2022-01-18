@@ -2,6 +2,7 @@ package objects.Evidence;
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
 import objects.Case.Case;
+import pages.Login;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -178,6 +179,7 @@ public class Evidence_functions {
         }
     }
     private void viewbytype(String t){
+
         ArrayList<Evidence> objects = copyObjectFromFile();
         System.out.println(" ");
         for (int i = 0; i < objects.size(); i++) {

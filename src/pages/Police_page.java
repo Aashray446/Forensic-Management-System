@@ -100,7 +100,9 @@ public class Police_page {
         while (current_choice != 100) {
             print_work.print_function(available_functions);
             print_work.show_exit_option();
+            print_work.print_label("-");
             current_choice = in.nextInt();
+            print_work.print_label("-");
 
             //Selection Based on choices
             if (current_choice == 0) {
