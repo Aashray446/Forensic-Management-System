@@ -65,17 +65,7 @@ public class helper_functions {
         System.out.println("100 :: Log Out");
         System.out.println("101 :: Log Out And Exit");
     }
-    public void logout(){
-        System.out.println("Logged out!");
-        login();
-    }
 
-    public void exit() {
-        clear_screen();
-        print_label("Thank You For Using Our System");
-        print_label("NAMAH SHIVAYA");
-        System.exit(0);
-    }
 
     public String next_line(String ask){
         String get = "";
@@ -96,40 +86,6 @@ public class helper_functions {
         }
         catch (IndexOutOfBoundsException e){
             return 1;
-        }
-    }
-
-    public void login(){
-        Scanner in = new Scanner(System.in);
-        Login login_session = new Login();
-        while(true) {
-            login_session.start();
-            if(login_session.check_password()) {
-                break;
-            }
-            else {
-                System.out.println("Press Any Key To Try Again");
-                in.nextLine();
-            }
-        }
-
-        if (login_session.role.equals("admin")) {
-            Admin_page as = new Admin_page();
-            as.start(login_session.user_name);
-        }
-
-        else if (login_session.role.equals("forensic")) {
-            Forensic_page as = new Forensic_page();
-            as.start(login_session.user_name);
-        }
-
-        else if(login_session.role.equals("police")) {
-            Police_page as = new Police_page();
-            as.start(login_session.user_name);
-        }
-
-        else{
-            System.out.println("Something went wrong");
         }
     }
 

@@ -43,6 +43,52 @@ public class Login {
         return false;
     }
 
+    public void login(){
+        Scanner in = new Scanner(System.in);
+        Login login_session = new Login();
+        while(true) {
+            login_session.start();
+            if(login_session.check_password()) {
+                break;
+            }
+            else {
+                System.out.println("Press Any Key To Try Again");
+                in.nextLine();
+            }
+        }
+
+        if (login_session.role.equals("admin")) {
+            Admin_page as = new Admin_page();
+            as.start(login_session.user_name);
+        }
+
+        else if (login_session.role.equals("forensic")) {
+            Forensic_page as = new Forensic_page();
+            as.start(login_session.user_name);
+        }
+
+        else if(login_session.role.equals("police")) {
+            Police_page as = new Police_page();
+            as.start(login_session.user_name);
+        }
+
+        else{
+            System.out.println("Something went wrong");
+        }
+    }
+
+    public void logout(){
+        System.out.println("Logged out!");
+        login();
+    }
+
+    public void exit() {
+        help.clear_screen();
+        help.print_label("Thank You For Using Our System");
+        help.print_label("NAMAH SHIVAYA");
+        System.exit(0);
+    }
+
     
 
 }

@@ -7,11 +7,9 @@ import Users.Investigator;
 
 import java.util.Scanner;
 
-public class Police_page {
+public class Police_page extends Page {
 
-    private helper_functions print_work = helper_functions.getInstance();
     private Investigator investigator = new Investigator();
-    private String user_name;
     private Scanner in = new Scanner(System.in);
 
     // Listing Out The available Functions
@@ -32,10 +30,7 @@ public class Police_page {
             "Update profile"
     };
 
-    //Choice of the User
-    private String current_choice = "-1";
-
-    //Start
+    @Override
     public void start(String user_name) {
         this.user_name = user_name;
         print_work.wait_for_user();
@@ -47,6 +42,7 @@ public class Police_page {
     }
 
 
+    @Override
     public  void checkChangePassword(){
         Scanner in  = new Scanner(System.in);
         investigator.set_current_user(user_name);
@@ -57,6 +53,7 @@ public class Police_page {
         }
     }
 
+    @Override
     public void updateProfile(){
         Scanner in = new Scanner(System.in);
         investigator.set_current_user(user_name);
@@ -96,7 +93,8 @@ public class Police_page {
     }
 
     //Showing the options and taking input from the User
-    private void home_page() {
+    @Override
+    void home_page() {
         while (!current_choice.equals("100")) {
             print_work.print_function(available_functions);
             print_work.show_exit_option();
@@ -134,9 +132,9 @@ public class Police_page {
             } else if (current_choice.equals("13")) {
                 updateProfile();
             } else if(current_choice.equals("100")) {
-                print_work.logout();
+                login.logout();
             } else if(current_choice.equals("101")) {
-                print_work.exit();
+                login.exit();
             } else {
                 System.out.println("Wrong Choice, try again!");
             }

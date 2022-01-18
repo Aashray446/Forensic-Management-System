@@ -1,13 +1,14 @@
 package Main;
 
 import Helper_class.helper_functions;
+import pages.Login;
 
 
 public class Main {
 
     public static void main(String[] args) {
-        helper_functions functions = helper_functions.getInstance();
-        functions.login();
+        Login login = new Login();
+        login.login();
     }
 
 }
