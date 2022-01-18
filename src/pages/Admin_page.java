@@ -43,27 +43,21 @@ public class Admin_page {
             //Selection Based on choices
             if(current_choice==0) {
                 admin.create_new_user();
-            }
-
-            if(current_choice==1) {
+            } else if(current_choice==1) {
                 admin.change_user_password();
-            }
-
-            if(current_choice==2) {
+            } else if(current_choice==2) {
                 admin.delete_user();
-            }
-
-            if(current_choice==3) {
+            } else if(current_choice==3) {
                 admin.display_all_user();
-            }
-
-            if(current_choice==4) {
+            } else if(current_choice==4) {
                 admin.search_user_by_name();
+            } else if(current_choice == 100) {
+                print_work.exit();
+            }else {
+                System.out.println("Wrong Choice, try again!");
             }
 
-            if(current_choice == 100) {
-                print_work.exit();
-            }
+
         }
     }
 

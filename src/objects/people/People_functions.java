@@ -17,6 +17,7 @@ public class People_functions {
     helper_functions functions = helper_functions.getInstance();
 
     public void ViewPeople() {
+        functions.clear_screen();
         Scanner in = new Scanner(System.in);
         System.out.println("Enter People id : ");
         int id = in.nextInt();
@@ -24,9 +25,9 @@ public class People_functions {
     }
 
     public People AddPeople() {
-        Scanner in = new Scanner(System.in);
+        functions.clear_screen();
         System.out.println("Enter id : ");
-        int id = in.nextInt();
+        int id = functions.get_id("People.csv");
         String name = functions.next_line("Enter name : ");
         String address = functions.next_line("Enter address : ");
         String desription = functions.next_line("Enter description : ");
@@ -44,6 +45,7 @@ public class People_functions {
     }
 
     public void UpdatePeople() {
+        functions.clear_screen();
         Scanner in = new Scanner(System.in);
         System.out.println("Enter People id : ");
         int id = in.nextInt();
@@ -68,6 +70,7 @@ public class People_functions {
     }
 
     public void RemovePeople() {
+        functions.clear_screen();
         Scanner in = new Scanner(System.in);
         System.out.println("Enter People id : ");
         int id = in.nextInt();
@@ -124,12 +127,14 @@ public class People_functions {
             } else if (key == 8) {
                 pep.setStatements_given(value);
             } else {
-                System.out.println("Wrong input");
+                System.out.println("Wrong Choice !");
+                System.out.println();
             }
             people.add(pep);
             write(people);
         } else {
             System.out.println("ID not found!");
+            System.out.println();
         }
 
     }
@@ -163,6 +168,7 @@ public class People_functions {
             print(pep);
         } else {
             System.out.println("ID not found!");
+            System.out.println();
         }
 
     }
@@ -194,6 +200,7 @@ public class People_functions {
     }
 
     private void print(People PeopleObject) {
+        functions.print_label("-");
         System.out.println();
         System.out.println("People id           : " + PeopleObject.getId());
         System.out.println("People name         : " + PeopleObject.getName());
@@ -205,6 +212,7 @@ public class People_functions {
         System.out.println("Added by            : " + PeopleObject.getAdded_by());
         System.out.println("Statements given    : " + PeopleObject.getStatements_given());
         System.out.println();
+        functions.print_label("-");
     }
 
 }

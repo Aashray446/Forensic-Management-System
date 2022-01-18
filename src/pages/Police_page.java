@@ -24,6 +24,10 @@ public class Police_page {
             "Start New Case",
             "Update Case",
             "Remove Case",
+            "View People",
+            "Add People",
+            "Update People",
+            "Delete People",
             "Change Password",
             "Update profile"
     };
@@ -63,7 +67,7 @@ public class Police_page {
             System.out.println("Enter [1] to change name");
             System.out.println("Enter [2] to change address");
             System.out.println("Enter [3] to change phone number");
-            System.out.println("Enter [0] to stop;");
+            System.out.println("Enter [0] to stop");
             int option = in.nextInt();
 
             if(option==1){
@@ -116,15 +120,22 @@ public class Police_page {
             } else if (current_choice == 7) {
                 investigator.Delete_case();
             } else if (current_choice == 8) {
-                checkChangePassword();
+                investigator.View_People();
             } else if (current_choice == 9) {
+                investigator.Add_People();
+            } else if (current_choice == 10){
+                investigator.Update_people();
+            } else if (current_choice == 11){
+                investigator.Delete_people();
+            } else if (current_choice == 12) {
+                checkChangePassword();
+            } else if (current_choice == 13) {
                 updateProfile();
-            }
-
-            if (current_choice == 100) {
+            } else if (current_choice == 100) {
                 print_work.exit();
+            } else {
+                System.out.println("Wrong Choice, try again!");
             }
-
         }
 
     }

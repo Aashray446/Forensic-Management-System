@@ -42,8 +42,9 @@ public class helper_functions {
 
     public void print_function(String[] function_array) {
         System.out.println("Please Enter the Corresponding Number to Select among the available Functions");
+        System.out.println();
         for(int i = 0; i < function_array.length; i++) {
-            System.out.print(i); 
+            System.out.print(i);
             System.out.print(". ::  ");
             System.out.print(function_array[i]);
             System.out.println();
@@ -71,13 +72,22 @@ public class helper_functions {
         System.out.print(ask);
         Scanner input = new Scanner(System.in);
         get = input.nextLine();
+        if (get.equals("")){
+            return null;
+        }
         return get;
     }
 
     public int get_id(String file_name){
-        ArrayList<String[]> user_data = dbms.read(file_name);
-        int i = user_data.size() - 1;
-        return Integer.parseInt(user_data.get(i)[0]) + 1;
+        try {
+            ArrayList<String[]> user_data = dbms.read(file_name);
+            int i = user_data.size() - 1;
+            return Integer.parseInt(user_data.get(i)[0]) + 1;
+        }
+        catch (IndexOutOfBoundsException e){
+            return 1;
+        }
     }
+
 
 }

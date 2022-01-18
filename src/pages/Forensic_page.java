@@ -115,18 +115,18 @@ public class Forensic_page {
                 forensic_expert.Add_Case();
             } else if (current_choice == 5) {
                 forensic_expert.Update_Case();
-            }
-            else if (current_choice == 6){
+            } else if (current_choice == 6){
                 forensic_expert.View_People();
-            }
-            else if (current_choice == 7) {
+            } else if (current_choice == 7) {
                 checkChangePassword();
             } else if (current_choice == 8) {
                 updateProfile();
-            }
-            if (current_choice == 100) {
+            } else if (current_choice == 100) {
                 print_work.exit();
+            } else {
+                System.out.println("Wrong Choice, try again!");
             }
+
 
         }
 

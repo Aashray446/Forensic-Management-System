@@ -14,6 +14,7 @@ public class Evidence_functions {
     helper_functions functions = helper_functions.getInstance();
 
     public void ViewEvidence(){
+        functions.clear_screen();
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Evidence id : ");
         int id = in.nextInt();
@@ -21,9 +22,9 @@ public class Evidence_functions {
     }
 
     public Evidence AddEvidence(){
-        Scanner in = new Scanner(System.in);
         functions.clear_screen();
         System.out.println("Please Enter the following details to add new Evidence");
+        System.out.println();
         int evidenceid = functions.get_id("Evidences.csv");
         String evidencename = functions.next_line("Enter evidence name : ");
         String evidencedescription = functions.next_line("Enter evidence Description : ");
@@ -39,7 +40,10 @@ public class Evidence_functions {
         return EvidenceObject;
     }
     public void UpdateEvidence(){
+        functions.clear_screen();
         Scanner in = new Scanner(System.in);
+        System.out.println("Enter following details to Update evidences.");
+        System.out.println();
         System.out.println("Enter Evidence id : ");
         int id = in.nextInt();
         System.out.println("[1] to change Evidence name");
@@ -62,6 +66,8 @@ public class Evidence_functions {
     }
     public void RemoveEvidence(){
         Scanner in = new Scanner(System.in);
+        System.out.println("Enter following details to Delete Evidence.");
+        System.out.println();
         System.out.println("Enter Evidence id : ");
         int id  = in.nextInt();
         try {
@@ -108,13 +114,15 @@ public class Evidence_functions {
                 evidence.setCollectedby(value);
             }
             else {
-                System.out.println("Wrong input");
+                System.out.println("Wrong Choice!");
+                System.out.println();
             }
             Evidences.add(evidence);
             write(Evidences);
         }
         else {
             System.out.println("ID not found!");
+            System.out.println();
         }
 
     }
@@ -165,6 +173,7 @@ public class Evidence_functions {
         }
         else {
             System.out.println("ID not found!");
+            System.out.println();
         }
 
     }
@@ -194,6 +203,7 @@ public class Evidence_functions {
 
     }
     private void print(Evidence evidencePropertiesObject) {
+        functions.print_label("-");
         System.out.println();
         System.out.println("Evidence id          : "+evidencePropertiesObject.getEvidenceid());
         System.out.println("Evidence name        : "+evidencePropertiesObject.getEvidencename());
@@ -204,6 +214,7 @@ public class Evidence_functions {
         System.out.println("Place of collection  : "+evidencePropertiesObject.getDateofcollection());
         System.out.println("Collected by         : "+evidencePropertiesObject.getCollectedby());
         System.out.println();
+        functions.print_label("-");
     }
 
 }

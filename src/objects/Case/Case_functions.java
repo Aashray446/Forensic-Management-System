@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Scanner;
 
 
@@ -22,6 +23,7 @@ public class Case_functions {
 
 
     public void AddCase(){
+        functions.clear_screen();
         Scanner in = new Scanner(System.in);
         int caseid = functions.get_id("Cases.csv");
         String casename = functions.next_line("Enter case name : ");
@@ -38,8 +40,12 @@ public class Case_functions {
                 break;
             }
             else if (hasid == true){
-                //TODO check if the id already present in the case
-                evidence_id.add(id);
+                if(checkpepevid(id,'e')){
+                    System.out.println("Evidence id already exists!");
+                }
+                else{
+                    evidence_id.add(id);
+                }
             }
             else {
                 System.out.println("ID entered is not valid!");
@@ -47,7 +53,7 @@ public class Case_functions {
                 int opt = in.nextInt();
                 if (opt==1){
                     Evidence newevd = evidence.AddEvidence();
-                    evidence_id.add(evidence.giveid(newevd));
+                    evidence_id.add(newevd.getEvidenceid());
                 }
             }
 
@@ -62,8 +68,11 @@ public class Case_functions {
                 break;
             }
             else if (hasid == true){
-                //TODO check if the id already present in the case
-                people_id.add(id);
+                if (checkpepevid(id,'p')){
+                    System.out.println("People id already exist!");
+                }else{
+                    people_id.add(id);
+                }
             }
             else {
                 System.out.println("ID entered is not valid!");
@@ -71,7 +80,7 @@ public class Case_functions {
                 int opt = in.nextInt();
                 if (opt==1){
                     People newperson = person.AddPeople();
-                    people_id.add(person.giveid(newperson));
+                    people_id.add(newperson.getId());
                 }
             }
 
@@ -84,6 +93,7 @@ public class Case_functions {
     }
 
     public void ViewCase(){
+        functions.clear_screen();
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Case id : ");
         int id = in.nextInt();
@@ -91,6 +101,7 @@ public class Case_functions {
     }
 
     public void UpdateCase(){
+        functions.clear_screen();
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Case id : ");
         int id = in.nextInt();
@@ -135,17 +146,35 @@ public class Case_functions {
 
     }
 
-    //TODO check if the id already present in the case
-    //    private boolean checkevidpeid(int cid,int id, char c){
-    //        ArrayList<Case> cases = copyObjectFromFile();
-    //        Case acase = Checkbyid(cases,cid);
-    //        if (c == 'e'){
-    //            acase
-    //        }
-    //        else if (c == 'p'){
-    //        }
-    //    }
+    private boolean checkpepevid(int id, char x){
+        ArrayList<Case> cases = copyObjectFromFile();
+        Iterator iterator = cases.iterator();
+        while (iterator.hasNext()) {
+            String[] line = String.valueOf(iterator.next()).trim().split(",");
+            if (x == 'e') {
+                String[] evidenceids = line[3].split(" ");
+                for (int i = 0; i < evidenceids.length; i++) {
+                    if (Integer.valueOf(evidenceids[i]) == id) {
+                        return true;
+                    }
+                }
 
+            } else if (x == 'p') {
+                String[] peopleids = line[5].split(" ");
+                for (int i = 0; i < peopleids.length; i++) {
+                    if (Integer.valueOf(peopleids[i]) == id) {
+                        return true;
+                    }
+
+                }
+
+
+            }
+        }
+        return false;
+
+
+    }
 
     private void Updatebyid(int id, int key, String value, ArrayList<Integer> arrval) throws IOException {
         ArrayList<Case> cases = copyObjectFromFile();
@@ -168,13 +197,15 @@ public class Case_functions {
                 acase.setPeople_id(arrval);
             }
             else {
-                System.out.println("Wrong input");
+                System.out.println("Wrong Choice!");
+                System.out.println();
             }
             cases.add(acase);
             write(cases);
         }
         else {
             System.out.println("ID not found!");
+            System.out.println();
         }
 
     }
@@ -228,6 +259,7 @@ public class Case_functions {
         }
         else {
             System.out.println("ID not found!");
+            System.out.println();
         }
 
     }
@@ -266,6 +298,7 @@ public class Case_functions {
 
     }
     private void print(Case CaseObject) {
+        functions.print_label("-");
         System.out.println();
         System.out.println("Case id          : "+CaseObject.getId());
         System.out.println("Case name        : "+CaseObject.getName());
@@ -274,6 +307,7 @@ public class Case_functions {
         System.out.println("Evidence ids     : "+CaseObject.getEvidence_id());
         System.out.println("People ids       : "+CaseObject.getPeople_id());
         System.out.println();
+        functions.print_label("-");
     }
 
 }

@@ -18,18 +18,18 @@ public class Admin extends User {
         //Call new save_new_user()
         System.out.println("Enter the username");
         super.user_name = in.next();
-        print_work.print_label(" ");
+        print_work.print_label("-");
         System.out.println("Enter the password");
         super.password = in.next();
-        print_work.print_label(" ");
+        print_work.print_label("-");
         System.out.println("Enter the role");
         super.role = in.next();
         System.out.println("Enter the Name");
         super.name = in.next();
-        print_work.print_label(" ");
+        print_work.print_label("-");
         System.out.println("Enter the Address");
         super.address = in.next();
-        print_work.print_label(" ");
+        print_work.print_label("-");
         System.out.println("Enter the phone number");
         super.phone_number = in.next();
         
