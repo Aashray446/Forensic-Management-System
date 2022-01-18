@@ -269,7 +269,7 @@ public class Evidence_functions {
         System.out.println("Evidence description : "+evidencePropertiesObject.getEvidencedescription());
         System.out.println("Time of collection   : "+evidencePropertiesObject.getTimeofcollection());
         System.out.println("Date of collection   : "+evidencePropertiesObject.getDateofcollection());
-        System.out.println("Place of collection  : "+evidencePropertiesObject.getDateofcollection());
+        System.out.println("Place of collection  : "+evidencePropertiesObject.getPlaceofcollection());
         System.out.println("Collected by         : "+evidencePropertiesObject.getCollectedby());
         System.out.println();
         functions.print_label("-");

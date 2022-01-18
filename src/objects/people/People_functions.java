@@ -46,7 +46,6 @@ public class People_functions {
 
     public People AddPeople() {
         functions.clear_screen();
-        System.out.println("Enter id : ");
         int id = functions.get_id("People.csv");
         String name = functions.next_line("Enter name : ");
         String address = functions.next_line("Enter address : ");

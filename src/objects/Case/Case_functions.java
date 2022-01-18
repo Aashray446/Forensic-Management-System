@@ -1,4 +1,5 @@
 package objects.Case;
+
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
 import objects.Evidence.Evidence;
@@ -10,8 +11,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.Scanner;
 
 
@@ -37,7 +36,7 @@ public class Case_functions {
             if (id == 0){
                 evidence_id.add(null);
             }
-            else if (hasid == true){
+            else if (hasid){
                 if(checkpepevid(id,'e')){
                     System.out.println("Evidence id already exists!");
                 }
@@ -54,7 +53,7 @@ public class Case_functions {
                     evidence_id.add(newevd.getEvidenceid());
                 }
             }
-            System.out.println("Enter [0] to stop press enter to add more:");
+            System.out.println("Enter [0] to stop enter anything add more:");
             int check  = in.nextInt();
             if (check==0){
                 break;
@@ -69,7 +68,7 @@ public class Case_functions {
             if (id == 0){
                 people_id.add(null);
             }
-            else if (hasid == true){
+            else if (hasid){
                 if (checkpepevid(id,'p')){
                     System.out.println("People id already exist!");
                 }else{
@@ -85,7 +84,7 @@ public class Case_functions {
                     people_id.add(newperson.getId());
                 }
             }
-            System.out.println("Enter [0] to stop press enter to add more:");
+            System.out.println("Enter [0] to stop enter anything add more:");
             int check  = in.nextInt();
             if (check==0){
                 break;
@@ -138,13 +137,14 @@ public class Case_functions {
         System.out.println("[5] to change people ids");
         System.out.println("Enter key :");
         int key = in.nextInt();
-        String value  = new String();
-        ArrayList<Integer> arrvalues = new ArrayList<>();
+        String value  = "";
+        ArrayList<Integer> arrvalues;
         ArrayList<Case> cases = copyObjectFromFile();
         Case acase = Checkbyid(cases,id);
         if (key == 4){
             System.out.println("Enter index to change : ");
             int index = in.nextInt();
+            assert acase != null;
             arrvalues = acase.getEvidence_id();
             System.out.println("Enter new id : ");
             int intvalue = in.nextInt();
@@ -154,6 +154,7 @@ public class Case_functions {
         else if (key ==5){
             System.out.println("Enter index to change : ");
             int index = in.nextInt();
+            assert acase != null;
             arrvalues = acase.getPeople_id();
             System.out.println("Enter new id :");
             int intvalue = in.nextInt();
@@ -174,21 +175,20 @@ public class Case_functions {
 
     private boolean checkpepevid(int id, char x){
         ArrayList<Case> cases = copyObjectFromFile();
-        Iterator iterator = cases.iterator();
-        while (iterator.hasNext()) {
-            String[] line = String.valueOf(iterator.next()).trim().split(",");
+        for (Case aCase : cases) {
+            String[] line = String.valueOf(aCase).trim().split(",");
             if (x == 'e') {
                 String[] evidenceids = line[3].split(" ");
-                for (int i = 0; i < evidenceids.length; i++) {
-                    if (Integer.valueOf(evidenceids[i]) == id) {
+                for (String evidenceid : evidenceids) {
+                    if (Integer.parseInt(evidenceid) == id) {
                         return true;
                     }
                 }
 
             } else if (x == 'p') {
                 String[] peopleids = line[5].split(" ");
-                for (int i = 0; i < peopleids.length; i++) {
-                    if (Integer.valueOf(peopleids[i]) == id) {
+                for (String peopleid : peopleids) {
+                    if (Integer.parseInt(peopleid) == id) {
                         return true;
                     }
 
@@ -202,8 +202,8 @@ public class Case_functions {
     }
     private void viewall(){
         ArrayList<Case> objects = copyObjectFromFile();
-        for (int i = 0; i < objects.size(); i++) {
-            print(objects.get(i));
+        for (Case object : objects) {
+            print(object);
         }
 
 
@@ -263,7 +263,7 @@ public class Case_functions {
 
     private void sortbyid(){
         ArrayList<Case> Cases = copyObjectFromFile();
-        Collections.sort(Cases, Case.StuCaseId);
+        Cases.sort(Case.StuCaseId);
         try {
             write(Cases);
         } catch (IOException e) {
@@ -296,16 +296,16 @@ public class Case_functions {
 
     }
     private Case Checkbyid(ArrayList<Case> Cases, int id) {
-        for (int i = 0; i < Cases.size(); i++) {
-            if (Integer.valueOf(Cases.get(i).getId())==id) {
-                return Cases.get(i);
+        for (Case aCase : Cases) {
+            if (aCase.getId() == id) {
+                return aCase;
             }
         }
         return null;
     }
     private ArrayList<Case> copyObjectFromFile() {
         ArrayList<Case> Cases = new ArrayList<>();
-        String line = "";
+        String line;
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/Database/Cases.csv"));
             while ((line = br.readLine()) != null) {
@@ -314,13 +314,13 @@ public class Case_functions {
                 String[] peid = cases[5].split(" ");
                 ArrayList<Integer> evidence_id = new ArrayList<>();
                 ArrayList<Integer> people_id = new ArrayList<>();
-                for (int i = 0; i < evid.length  ; i++) {
-                    evidence_id.add(Integer.valueOf(evid[i]));
+                for (String s : evid) {
+                    evidence_id.add(Integer.valueOf(s));
                 }
-                for (int i = 0; i < peid.length  ; i++) {
-                    people_id.add(Integer.valueOf(peid[i]));
+                for (String s : peid) {
+                    people_id.add(Integer.valueOf(s));
                 }
-                Case CaseObject = new Case(Integer.valueOf(cases[0]), cases[1], cases[2], evidence_id, cases[4], people_id);
+                Case CaseObject = new Case(Integer.parseInt(cases[0]), cases[1], cases[2], evidence_id, cases[4], people_id);
                 Cases.add(CaseObject);
             }
         } catch (IOException e) {

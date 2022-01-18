@@ -33,7 +33,7 @@ public class Police_page {
     };
 
     //Choice of the User
-    private int current_choice = -1;
+    private String current_choice = "-1";
 
     //Start
     public void start(String user_name) {
@@ -97,45 +97,45 @@ public class Police_page {
 
     //Showing the options and taking input from the User
     private void home_page() {
-        while (current_choice != 100) {
+        while (!current_choice.equals("100")) {
             print_work.print_function(available_functions);
             print_work.show_exit_option();
             print_work.print_label("-");
-            current_choice = in.nextInt();
+            current_choice = print_work.next_line("Enter : ");
             print_work.print_label("-");
 
             //Selection Based on choices
-            if (current_choice == 0) {
+            if (current_choice.equals("0")) {
                 investigator.View_Evidence();
-            } else if (current_choice == 1) {
+            } else if (current_choice.equals("1")) {
                 investigator.Add_Evidence();
-            } else if (current_choice == 2) {
+            } else if (current_choice.equals("2")) {
                 investigator.Update_Evidence();
-            } else if (current_choice == 3) {
+            } else if (current_choice.equals("3")) {
                 investigator.Delete_Evidence();
-            } else if (current_choice == 4) {
+            } else if (current_choice.equals("4")) {
                 investigator.View_Case();
-            } else if (current_choice == 5) {
+            } else if (current_choice.equals("5")) {
                 investigator.Add_Case();
-            } else if (current_choice == 6) {
+            } else if (current_choice.equals("6")) {
                 investigator.Update_Case();
-            } else if (current_choice == 7) {
+            } else if (current_choice.equals("7")) {
                 investigator.Delete_case();
-            } else if (current_choice == 8) {
+            } else if (current_choice.equals("8")) {
                 investigator.View_People();
-            } else if (current_choice == 9) {
+            } else if (current_choice.equals("9")) {
                 investigator.Add_People();
-            } else if (current_choice == 10){
+            } else if (current_choice.equals("10")){
                 investigator.Update_people();
-            } else if (current_choice == 11){
+            } else if (current_choice.equals("11")){
                 investigator.Delete_people();
-            } else if (current_choice == 12) {
+            } else if (current_choice.equals("12")) {
                 checkChangePassword();
-            } else if (current_choice == 13) {
+            } else if (current_choice.equals("13")) {
                 updateProfile();
-            } else if(current_choice == 100) {
+            } else if(current_choice.equals("100")) {
                 print_work.logout();
-            } else if(current_choice==101) {
+            } else if(current_choice.equals("101")) {
                 print_work.exit();
             } else {
                 System.out.println("Wrong Choice, try again!");

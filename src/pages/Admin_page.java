@@ -21,7 +21,7 @@ public class Admin_page {
     };
 
     //Choice of the User
-    private int current_choice = -1;
+    private String current_choice = "-1";
     //Start
     public void start(String user_name) {
         this.user_name = user_name;
@@ -35,27 +35,27 @@ public class Admin_page {
 
     //Showing the options and taking input from the User
     private void home_page() {
-        while(current_choice != 100) {
+        while(!current_choice.equals("100")) {
         print_work.print_function(available_functions);
         print_work.show_exit_option();
         print_work.print_label("-");
-        current_choice = in.nextInt();
+        current_choice = print_work.next_line("Enter : ");
         print_work.print_label("-");
         
             //Selection Based on choices
-            if(current_choice==0) {
+            if(current_choice.equals("0")) {
                 admin.create_new_user();
-            } else if(current_choice==1) {
+            } else if(current_choice.equals("1")) {
                 admin.change_user_password();
-            } else if(current_choice==2) {
+            } else if(current_choice.equals("2")) {
                 admin.delete_user();
-            } else if(current_choice==3) {
+            } else if(current_choice.equals("3")) {
                 admin.display_all_user();
-            } else if(current_choice==4) {
+            } else if(current_choice.equals("4")) {
                 admin.search_user_by_name();
-            } else if(current_choice == 100) {
+            } else if(current_choice.equals("100")) {
                 print_work.logout();
-            }else if(current_choice==101) {
+            }else if(current_choice.equals("101")) {
                 print_work.exit();
             }else{
                 System.out.println("Wrong Choice, try again!");
