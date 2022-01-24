@@ -1,4 +1,4 @@
-package objects.people;
+package objects.People;
 import java.util.Comparator;
 
 public class People {

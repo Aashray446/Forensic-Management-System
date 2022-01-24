@@ -14,19 +14,23 @@ public class Evidence_functions {
     helper_functions functions = helper_functions.getInstance();
 
     public void ViewEvidence(){
-        Scanner in = new Scanner(System.in);
         functions.clear_screen();
         while (true){
-            System.out.println("[1] to view case by id");
-            System.out.println("[2] to view all case");
+            System.out.println("[1] to view Evidence by id");
+            System.out.println("[2] to view all Evidences");
             System.out.println("[3] to view by date");
             System.out.println("[4] to view by type");
             System.out.println("[0] to stop");
-            int opt = in.nextInt();
+            int opt = functions.next_int("Enter : ");
             if (opt==1){
                 System.out.println("Enter Evidence id : ");
-                int id = in.nextInt();
-                Searchbyid(id);
+                int id = functions.next_int("Enter : ");
+                if(id==0){
+                    System.out.println("ID cannot be zero");
+                }else {
+                    Searchbyid(id);
+                }
+
             }
             else if (opt==2){
                 viewall();
@@ -34,12 +38,12 @@ public class Evidence_functions {
             }
             else if(opt==3){
                 System.out.print("Enter date (format : DD-MM-YYYY) : ");
-                String date = in.next();
+                String date = functions.next_line("Enter : ");
                 viewbydate(date);
             }
             else if(opt==4){
                 System.out.print("Enter type : ");
-                String type = in.next();
+                String type = functions.next_line("Enter : ");
                 viewbytype(type);
             }
             else if(opt==0){
@@ -72,11 +76,10 @@ public class Evidence_functions {
     }
     public void UpdateEvidence(){
         functions.clear_screen();
-        Scanner in = new Scanner(System.in);
         System.out.println("Enter following details to Update evidences.");
         System.out.println();
         System.out.println("Enter Evidence id : ");
-        int id = in.nextInt();
+        int id = functions.next_int("Enter : ");
         System.out.println("[1] to change Evidence name");
         System.out.println("[2] to change Evidence description");
         System.out.println("[3] to change Evidence Type ");
@@ -85,7 +88,7 @@ public class Evidence_functions {
         System.out.println("[6] to change Place of collection");
         System.out.println("[7] to change Collected by");
         System.out.println("Enter key :");
-        int key = in.nextInt();
+        int key = functions.next_int("Enter : ");
         String value = functions.next_line("Enter value to change : ");
         try {
             Updatebyid(id,key,value);
@@ -96,11 +99,10 @@ public class Evidence_functions {
 
     }
     public void RemoveEvidence(){
-        Scanner in = new Scanner(System.in);
         System.out.println("Enter following details to Delete Evidence.");
         System.out.println();
         System.out.println("Enter Evidence id : ");
-        int id  = in.nextInt();
+        int id  = functions.next_int("Enter : ");
         try {
             Deletebyid(id);
         } catch (IOException e) {
@@ -160,8 +162,15 @@ public class Evidence_functions {
 
     private void viewall(){
         ArrayList<Evidence> objects = copyObjectFromFile();
-        for (int i = 0; i < objects.size(); i++) {
-            print(objects.get(i));
+        if(objects.size()==1){
+
+            System.out.println("Evidence is Empty!");
+
+        }
+        else {
+            for (int i = 1; i < objects.size(); i++) {
+                print(objects.get(i));
+            }
         }
 
     }
@@ -169,21 +178,39 @@ public class Evidence_functions {
     private void viewbydate(String d){
         ArrayList<Evidence> objects = copyObjectFromFile();
         System.out.println(" ");
-        for (int i = 0; i < objects.size(); i++) {
-            if (objects.get(i).getDateofcollection().equals(d)) {
-                print(objects.get(i));
+        if(objects.size()==1){
+            if(objects.get(0).getEvidenceid()==0){
+                System.out.println("Evidence is Empty!");
             }
         }
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                if (objects.get(i).getDateofcollection().equals(d)) {
+                    print(objects.get(i));
+                }
+            }
+
+        }
+
     }
     private void viewbytype(String t){
 
         ArrayList<Evidence> objects = copyObjectFromFile();
-        System.out.println(" ");
-        for (int i = 0; i < objects.size(); i++) {
-            if ((objects.get(i).getEvidencetype().toUpperCase().trim()).equals(t.toUpperCase().trim())) {
-                print(objects.get(i));
+        if(objects.size()==1){
+            if(objects.get(0).getEvidenceid()==0){
+                System.out.println("Evidence is Empty!");
             }
         }
+        else {
+            System.out.println(" ");
+            for (int i = 0; i < objects.size(); i++) {
+                if ((objects.get(i).getEvidencetype().toUpperCase().trim()).equals(t.toUpperCase().trim())) {
+                    print(objects.get(i));
+                }
+            }
+
+        }
+
     }
 
     public boolean checkid(int id){
@@ -248,8 +275,16 @@ public class Evidence_functions {
             BufferedReader br = new BufferedReader(new FileReader("src/Database/Evidences.csv"));
             while ((line = br.readLine()) != null) {
                 String[] evidences = line.split(",");
-                Evidence EvidenceObject = new Evidence(Integer.valueOf(evidences[0]), evidences[1], evidences[2], evidences[3], evidences[4], evidences[5], evidences[6], evidences[7]);
-                Evidences.add(EvidenceObject);
+                try{
+                    Evidence EvidenceObject = new Evidence(Integer.valueOf(evidences[0]), evidences[1], evidences[2], evidences[3], evidences[4], evidences[5], evidences[6], evidences[7]);
+                    Evidences.add(EvidenceObject);
+
+                }catch (NumberFormatException e){
+                    Evidence EvidenceObject = new Evidence(0, "name","description","type","time","date", "place","collectedby");
+                    Evidences.add(EvidenceObject);
+
+                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();

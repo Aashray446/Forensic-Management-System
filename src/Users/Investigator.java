@@ -2,7 +2,7 @@ package Users;
 
 import objects.Case.Case_functions;
 import objects.Evidence.Evidence_functions;
-import objects.people.People_functions;
+import objects.People.People_functions;
 
 public class Investigator extends User {
 

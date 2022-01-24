@@ -4,8 +4,9 @@ import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
 import objects.Evidence.Evidence;
 import objects.Evidence.Evidence_functions;
-import objects.people.People;
-import objects.people.People_functions;
+import objects.People.People;
+import objects.People.People_functions;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,12 +19,12 @@ public class Case_functions {
     handle_dbms dbms = handle_dbms.getInstance();
     helper_functions functions = helper_functions.getInstance();
     Evidence_functions evidence = new Evidence_functions();
-    People_functions person = new People_functions();
+    People_functions person = new  People_functions();
+
 
 
     public void AddCase(){
         functions.clear_screen();
-        Scanner in = new Scanner(System.in);
         int caseid = functions.get_id("Cases.csv");
         String casename = functions.next_line("Enter case name : ");
         String casedescription = functions.next_line("Enter case Description : ");
@@ -31,7 +32,7 @@ public class Case_functions {
         ArrayList<Integer> evidence_id = new ArrayList<>();
         while (true){
             System.out.print("Enter evidence id :");
-            int id = in.nextInt();
+            int id = functions.next_int("Enter : ");
             boolean hasid = evidence.checkid(id);
             if (id == 0){
                 evidence_id.add(null);
@@ -47,14 +48,14 @@ public class Case_functions {
             else {
                 System.out.println("ID entered is not valid!");
                 System.out.println("Enter [1] to add new evidence");
-                int opt = in.nextInt();
+                int opt = functions.next_int("Enter : ");
                 if (opt==1){
                     Evidence newevd = evidence.AddEvidence();
                     evidence_id.add(newevd.getEvidenceid());
                 }
             }
             System.out.println("Enter [0] to stop enter anything add more:");
-            int check  = in.nextInt();
+            int check  = functions.next_int("Enter : ");
             if (check==0){
                 break;
             }
@@ -63,7 +64,7 @@ public class Case_functions {
         ArrayList<Integer> people_id = new ArrayList<>();
         while (true){
             System.out.println("Enter people id :");
-            int id = in.nextInt();
+            int id = functions.next_int("Enter : ");
             boolean hasid = person.checkid(id);
             if (id == 0){
                 people_id.add(null);
@@ -78,14 +79,14 @@ public class Case_functions {
             else {
                 System.out.println("ID entered is not valid!");
                 System.out.println("Enter [1] to add new person");
-                int opt = in.nextInt();
+                int opt = functions.next_int("Enter : ");
                 if (opt==1){
                     People newperson = person.AddPeople();
                     people_id.add(newperson.getId());
                 }
             }
             System.out.println("Enter [0] to stop enter anything add more:");
-            int check  = in.nextInt();
+            int check  = functions.next_int("Enter : ");
             if (check==0){
                 break;
             }
@@ -99,17 +100,23 @@ public class Case_functions {
     }
 
     public void ViewCase(){
-        Scanner in = new Scanner(System.in);
         functions.clear_screen();
         while (true){
             System.out.println("[1] to view case by id");
             System.out.println("[2] to view all case");
             System.out.println("[0] to stop");
-            int opt = in.nextInt();
+            int opt = functions.next_int("Enter : ");
             if (opt==1){
                 System.out.println("Enter Case id : ");
-                int id = in.nextInt();
-                Searchbyid(id);
+                int id = functions.next_int("Enter : ");
+                if (id==0){
+                    System.out.println("Id cannot be zero");
+                }
+                else {
+                    Searchbyid(id);
+
+                }
+
             }
             else if (opt==2){
                 viewall();
@@ -127,37 +134,36 @@ public class Case_functions {
 
     public void UpdateCase(){
         functions.clear_screen();
-        Scanner in = new Scanner(System.in);
         System.out.println("Enter Case id : ");
-        int id = in.nextInt();
+        int id = functions.next_int("Enter  : ");
         System.out.println("[1] to change Case name");
         System.out.println("[2] to change Case description");
         System.out.println("[3] to change added by");
         System.out.println("[4] to change evidence ids");
         System.out.println("[5] to change people ids");
         System.out.println("Enter key :");
-        int key = in.nextInt();
+        int key = functions.next_int("Enter : ");
         String value  = "";
         ArrayList<Integer> arrvalues;
         ArrayList<Case> cases = copyObjectFromFile();
         Case acase = Checkbyid(cases,id);
         if (key == 4){
             System.out.println("Enter index to change : ");
-            int index = in.nextInt();
+            int index = functions.next_int("Enter : ");
             assert acase != null;
             arrvalues = acase.getEvidence_id();
             System.out.println("Enter new id : ");
-            int intvalue = in.nextInt();
+            int intvalue = functions.next_int("Enter : ");
             arrvalues.set(index,intvalue);
 
         }
         else if (key ==5){
             System.out.println("Enter index to change : ");
-            int index = in.nextInt();
+            int index = functions.next_int("Enter : ");
             assert acase != null;
             arrvalues = acase.getPeople_id();
             System.out.println("Enter new id :");
-            int intvalue = in.nextInt();
+            int intvalue = functions.next_int("Enter : ");
             arrvalues.set(index,intvalue);
         }
         else {
@@ -202,8 +208,14 @@ public class Case_functions {
     }
     private void viewall(){
         ArrayList<Case> objects = copyObjectFromFile();
-        for (Case object : objects) {
-            print(object);
+        if (objects.size()==1){
+            System.out.println("Case is Empty");
+
+        }
+        else {
+            for (int i = 1; i < objects.size(); i++) {
+                print(objects.get(i));
+            }
         }
 
 
@@ -320,8 +332,16 @@ public class Case_functions {
                 for (String s : peid) {
                     people_id.add(Integer.valueOf(s));
                 }
-                Case CaseObject = new Case(Integer.parseInt(cases[0]), cases[1], cases[2], evidence_id, cases[4], people_id);
-                Cases.add(CaseObject);
+                try{
+                    Case CaseObject = new Case(Integer.parseInt(cases[0]), cases[1], cases[2], evidence_id, cases[4], people_id);
+                    Cases.add(CaseObject);
+
+                }catch (NumberFormatException e){
+                    Case CaseObject = new Case(0,"name", "description",null,"addedby",null);
+                    Cases.add(CaseObject);
+
+                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package Helper_class;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class helper_functions {
@@ -72,13 +73,30 @@ public class helper_functions {
         return get;
     }
 
+
+    public int next_int(String ask){
+        int get ;
+        do{
+            try {
+                //this scanner is needed
+                Scanner in = new Scanner(System.in);
+                System.out.println(ask);
+                get = in.nextInt();
+                return get;
+            }catch (NumberFormatException | InputMismatchException e){
+                System.out.println("Enter Numbers only!");
+
+            }
+        }while (true);
+    }
+
     public int get_id(String file_name){
         try {
             ArrayList<String[]> user_data = dbms.read(file_name);
             int i = user_data.size() - 1;
-            return Integer.parseInt(user_data.get(i)[0]) + 1;
+            return Integer.valueOf(user_data.get(i)[0]) + 1;
         }
-        catch (IndexOutOfBoundsException e){
+        catch (IndexOutOfBoundsException | NumberFormatException e){
             return 1;
         }
     }

@@ -1,7 +1,8 @@
-package objects.people;
+package objects.People;
 
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,20 +14,24 @@ public class People_functions {
 
     handle_dbms dbms = handle_dbms.getInstance();
     helper_functions functions = helper_functions.getInstance();
-    Scanner in = new Scanner(System.in);
 
     public void ViewPeople() {
        
         functions.clear_screen();
         while (true){
-            System.out.println("[1] to view case by id");
-            System.out.println("[2] to view all case");
+            System.out.println("[1] to view People by id");
+            System.out.println("[2] to view all People");
             System.out.println("[0] to stop");
             String opt = functions.next_line("Enter the option : ");
             if (opt.equals("1")){
                 System.out.println("Enter People id : ");
-                String id = in.next();  
-               Searchbyid(Integer.parseInt(id));
+                int id = functions.next_int("Enter : ");
+                if(id==0){
+                    System.out.println("ID cannor be zero");
+                }
+                else {
+                    Searchbyid(id);
+                }
             }
             else if (opt.equals("2")){
                 viewall();
@@ -63,9 +68,8 @@ public class People_functions {
 
     public void UpdatePeople() {
         functions.clear_screen();
-        Scanner in = new Scanner(System.in);
         System.out.println("Enter People id : ");
-        int id = in.nextInt();
+        int id = functions.next_int("Enter : ");
         System.out.println("[1] to change name");
         System.out.println("[2] to change address");
         System.out.println("[3] to change description ");
@@ -75,7 +79,7 @@ public class People_functions {
         System.out.println("[7] to change added by");
         System.out.println("[8] to change statements given");
         System.out.println("Enter key :");
-        int key = in.nextInt();
+        int key = functions.next_int("Enter : ");
         String value = functions.next_line("Enter value to change : ");
         try {
             Updatebyid(id, key, value);
@@ -88,9 +92,8 @@ public class People_functions {
 
     public void RemovePeople() {
         functions.clear_screen();
-        Scanner in = new Scanner(System.in);
         System.out.println("Enter People id : ");
-        int id = in.nextInt();
+        int id = functions.next_int("Enter : ");
         try {
             Deletebyid(id);
         } catch (IOException e) {
@@ -112,8 +115,13 @@ public class People_functions {
     }
     private void viewall(){
         ArrayList<People> objects = copyObjectFromFile();
-        for (int i = 0; i < objects.size(); i++) {
-            print(objects.get(i));
+        if(objects.size()==1){
+            System.out.println("People data is empty!");
+        }
+        else {
+            for (int i = 1; i < objects.size(); i++) {
+                print(objects.get(i));
+            }
         }
 
 
@@ -211,8 +219,15 @@ public class People_functions {
             BufferedReader br = new BufferedReader(new FileReader("src/Database/People.csv"));
             while ((line = br.readLine()) != null) {
                 String[] pep = line.split(",");
-                People PeopleObject = new People(Integer.valueOf(pep[0]), pep[1], pep[2], pep[3], pep[4], pep[5], pep[6], pep[8], pep[7]);
-                people.add(PeopleObject);
+                try {
+                    People PeopleObject = new People(Integer.valueOf(pep[0]), pep[1], pep[2], pep[3], pep[4], pep[5], pep[6], pep[8], pep[7]);
+                    people.add(PeopleObject);
+                }
+                catch (NumberFormatException e){
+                    People PeopleObject = new People(0, "name", "address", "description", "category", "reason", "comment", "addedby", "statementsgiven");
+                    people.add(PeopleObject);
+                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
