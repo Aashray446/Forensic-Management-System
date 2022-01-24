@@ -1,10 +1,5 @@
 package Helper_class;
 
-import pages.Admin_page;
-import pages.Forensic_page;
-import pages.Login;
-import pages.Police_page;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -70,8 +65,7 @@ public class helper_functions {
     public String next_line(String ask){
         String get = "";
         System.out.print(ask);
-        Scanner input = new Scanner(System.in);
-        get = input.nextLine();
+        get = in.nextLine();
         if (get.equals("")){
             return null;
         }

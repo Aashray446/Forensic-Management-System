@@ -2,9 +2,6 @@ package objects.people;
 
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
-import objects.Case.Case;
-import objects.Evidence.Evidence;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,25 +13,26 @@ public class People_functions {
 
     handle_dbms dbms = handle_dbms.getInstance();
     helper_functions functions = helper_functions.getInstance();
+    Scanner in = new Scanner(System.in);
 
     public void ViewPeople() {
-        Scanner in = new Scanner(System.in);
+       
         functions.clear_screen();
         while (true){
             System.out.println("[1] to view case by id");
             System.out.println("[2] to view all case");
             System.out.println("[0] to stop");
-            int opt = in.nextInt();
-            if (opt==1){
+            String opt = functions.next_line("Enter the option : ");
+            if (opt.equals("1")){
                 System.out.println("Enter People id : ");
-                int id = in.nextInt();
-                Searchbyid(id);
+                String id = in.next();  
+               Searchbyid(Integer.parseInt(id));
             }
-            else if (opt==2){
+            else if (opt.equals("2")){
                 viewall();
 
             }
-            else if(opt==0){
+            else if(opt.equals("0")){
                 break;
             }
             else{

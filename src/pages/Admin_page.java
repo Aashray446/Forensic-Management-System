@@ -2,7 +2,6 @@ package pages;
 
 import java.util.Scanner;
 
-import Helper_class.helper_functions;
 import Users.Admin;
 
 public class Admin_page extends Page {
@@ -17,8 +16,9 @@ public class Admin_page extends Page {
             "Delete user",
             "Print all Available Users",
             "Search User By Name",
+            "Update profile",
             "Change Password",
-            "Update profile"
+           
     };
 
     @Override
@@ -34,7 +34,6 @@ public class Admin_page extends Page {
 
     @Override
     void checkChangePassword() {
-        Scanner in = new Scanner(System.in);
         admin.set_current_user(user_name);
         String old_password = print_work.next_line("Enter old password : ");
         if (old_password.equals(admin.password)) {
@@ -47,7 +46,6 @@ public class Admin_page extends Page {
 
     @Override
     public void updateProfile(){
-        Scanner in = new Scanner(System.in);
         admin.set_current_user(user_name);
         String name = admin.name;
         String address = admin.address;

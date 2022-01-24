@@ -1,13 +1,10 @@
 package objects.Evidence;
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
-import objects.Case.Case;
-import pages.Login;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Locale;
 import java.util.Scanner;
 
 
