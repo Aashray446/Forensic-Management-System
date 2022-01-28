@@ -29,7 +29,7 @@ public class Forensic_page extends Page {
         this.user_name = user_name;
         print_work.wait_for_user();
         print_work.clear_screen();
-        print_work.print_label("Welcome To Admin Control Panel");
+        print_work.print_label("Welcome To Forensic Control Panel");
         print_work.print_label(this.user_name);
         System.out.println();
         home_page();

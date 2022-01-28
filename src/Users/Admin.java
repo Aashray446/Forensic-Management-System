@@ -22,18 +22,20 @@ public class Admin extends User {
         System.out.println("Enter the password");
         super.password = in.next();
         print_work.print_label("-");
-        System.out.println("Enter the role");
+        System.out.println("Enter the role option among the [admin , forensic, police] options");
         super.role = in.next();
-        System.out.println("Enter the Name");
-        super.name = in.next();
+        super.role = super.role.toLowerCase();
+        while( !(super.role.equals("admin") || super.role.equals("forensic") || super.role.equals("police")) ) {
+            System.out.println("The role option is not correct Please enter it again");
+            super.role = in.next();
+        }
+        super.address = print_work.next_line("Enter the Name : ");
         print_work.print_label("-");
-        System.out.println("Enter the Address");
-        super.address = in.next();
+        super.address = print_work.next_line("Enter the Address : ");
         print_work.print_label("-");
-        System.out.println("Enter the phone number");
+        System.out.println("Enter the phone number : ");
         super.phone_number = in.next();
         
-
         if(super.save_new_user()) {
             print_work.print_label("The USER IS CREATED");
             print_work.wait_for_user();
