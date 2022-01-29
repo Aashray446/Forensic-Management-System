@@ -5,12 +5,12 @@
 ---
 ## Members 
 ---
-### [Aashraya Katiyar](https://github.com/Aashray446)
-### [Akshaj.S.R](https://github.com/Akshaj000)
-### Sai Sumitha
-### B Nandhana 
-### [Ronak Dudhani](https://github.com/ronakdudhani)
-### [Nikhil](https://github.com/NikhilSingh433)
+#### [Aashraya Katiyar](https://github.com/Aashray446)
+#### [Akshaj.S.R](https://github.com/Akshaj000)
+#### Sai Sumitha
+#### B Nandhana 
+#### [Ronak Dudhani](https://github.com/ronakdudhani)
+#### [Nikhil](https://github.com/NikhilSingh433)
 ---
 <h2 class="code-line" data-line-start=12 data-line-end=13 ><a id="Database_Handling_Instruction_12"></a>Database Handling Instructions</h2>
 
