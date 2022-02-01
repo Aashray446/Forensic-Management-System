@@ -35,12 +35,15 @@ public class Case_functions {
         ArrayList<Integer> people_id = new ArrayList<>();
 
 
-        System.out.println("Please Enter id to add evidences and people, if id doesnt exist u can add new people and evidence.");
+        System.out.println("Please Enter id to add evidences , if it doesn't exist u can add new evidence.");
         while (true){
             int id = functions.next_int("Enter evidence id (Enter 0 to stop):");
             boolean hasid = evidence.checkid(id);
             if (id == 0 && evidence_id.size()>0){
                 break;
+            }
+            else if (id==0){
+                System.out.println("Enter add atleast one evidence id!");
             }
             else if (hasid){
                 if(checkpeoplevidence(id,'e',evidence_id)){
@@ -62,11 +65,15 @@ public class Case_functions {
 
         }
 
+        System.out.println("Please Enter id to add evidences , if it doesn't exist u can add new people.");
         while (true){
             int id = functions.next_int("Enter people id (Enter 0 to stop):");
             boolean hasid = person.checkid(id);
             if (id == 0 && people_id.size()>0){
                 break;
+            }
+            else if (id==0){
+                System.out.println("Enter add atleast one people id!");
             }
             else if (hasid){
                 if (checkpeoplevidence(id,'p',people_id)){
@@ -98,32 +105,30 @@ public class Case_functions {
                 return true;
             }
         }
-        for (Case aCase : cases) {
-            try {
-                String[] line = String.valueOf(aCase).trim().split(",");
-                if (x == 'e') {
-                    String[] evidenceids = line[3].split(" ");
-                    for (String evidenceid : evidenceids) {
-                        if (Integer.parseInt(evidenceid) == id) {
-                            return true;
-                        }
+        Case thisobject = Checkbyid(cases,id);
+        try {
+            String[] line = String.valueOf(thisobject).trim().split(",");
+            if (x == 'e') {
+                String[] evidenceids = line[3].split(" ");
+                for (String evidenceid : evidenceids) {
+                    if (Integer.parseInt(evidenceid) == id) {
+                        return true;
                     }
+                }
 
-                } else if (x == 'p') {
-                    String[] peopleids = line[5].split(" ");
-                    for (String peopleid : peopleids) {
-                        if (Integer.parseInt(peopleid) == id) {
-                            return true;
-                        }
-
+            } else if (x == 'p') {
+                String[] peopleids = line[5].split(" ");
+                for (String peopleid : peopleids) {
+                    if (Integer.parseInt(peopleid) == id) {
+                        return true;
                     }
 
                 }
-            }
-            catch (NullPointerException e){
-                return false;
-            }
 
+            }
+        }
+        catch (NullPointerException | ArrayIndexOutOfBoundsException e){
+            return false;
         }
         return false;
 
@@ -194,7 +199,7 @@ public class Case_functions {
         ArrayList<Case> cases = copyObjectFromFile();
         Case acase = Checkbyid(cases,id);
         if (key == 4){
-            System.out.println("Enter index of id to change from 0. If index doesnt exist id will be appended.");
+            System.out.println("Enter index of id to change from 0. If index doesn't exist it will be appended.");
             System.out.println("Enter index to change : ");
             int index = functions.next_int("Enter : ");
             System.out.println("Enter new id : ");
@@ -222,7 +227,7 @@ public class Case_functions {
 
         }
         else if (key ==5){
-            System.out.println("Enter index of id to change from 0. If index doesnt exist id will be appended.");
+            System.out.println("Enter index of id to change from 0. If index doesnt exist it will be appended.");
             System.out.println("Enter index to change : ");
             int index = functions.next_int("Enter : ");
             System.out.println("Enter new id :");
@@ -296,7 +301,6 @@ public class Case_functions {
         }
 
     }
-
 
     private void Updatebyid(int id, int key, String value, ArrayList<Integer> arrval) throws IOException {
         ArrayList<Case> cases = copyObjectFromFile();
