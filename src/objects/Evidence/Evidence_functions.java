@@ -1,6 +1,7 @@
 package objects.Evidence;
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
+import objects.Case.Case;
 import pages.Login;
 
 import java.io.*;
@@ -22,6 +23,7 @@ public class Evidence_functions {
             System.out.println("[2] to view all Evidences");
             System.out.println("[3] to view by date");
             System.out.println("[4] to view by type");
+            System.out.println("[5] to view evidences added by you");
             System.out.println("[0] to stop");
             int opt = functions.next_int("Enter : ");
             if (opt==1){
@@ -47,6 +49,9 @@ public class Evidence_functions {
                 System.out.print("Enter type : ");
                 String type = functions.next_line("Enter : ");
                 viewbytype(type);
+            }
+            else if (opt==5){
+                viewuserevidence();
             }
             else if(opt==0){
                 break;
@@ -196,6 +201,27 @@ public class Evidence_functions {
         }
 
     }
+
+    private  void viewuserevidence(){
+        ArrayList<Evidence> objects = copyObjectFromFile();
+        System.out.println(" ");
+        System.out.println(" ");
+        if(objects.size()==1){
+            if(objects.get(0).getEvidenceid()==0){
+                System.out.println("Evidence is Empty!");
+            }
+        }
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                if (objects.get(i).getAddedby().equals(login.user_name)) {
+                    print(objects.get(i));
+                }
+            }
+
+        }
+
+    }
+
     private void viewbytype(String t){
 
         ArrayList<Evidence> objects = copyObjectFromFile();

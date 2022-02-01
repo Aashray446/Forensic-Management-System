@@ -35,10 +35,11 @@ public class Case_functions {
         ArrayList<Integer> people_id = new ArrayList<>();
 
 
+        System.out.println("Please Enter id to add evidences and people, if id doesnt exist u can add new people and evidence.");
         while (true){
             int id = functions.next_int("Enter evidence id (Enter 0 to stop):");
             boolean hasid = evidence.checkid(id);
-            if (id == 0){
+            if (id == 0 && evidence_id.size()>0){
                 break;
             }
             else if (hasid){
@@ -64,7 +65,7 @@ public class Case_functions {
         while (true){
             int id = functions.next_int("Enter people id (Enter 0 to stop):");
             boolean hasid = person.checkid(id);
-            if (id == 0){
+            if (id == 0 && people_id.size()>0){
                 break;
             }
             else if (hasid){
@@ -145,6 +146,7 @@ public class Case_functions {
         while (true){
             System.out.println("[1] to view case by id");
             System.out.println("[2] to view all case");
+            System.out.println("[3] to view cases added by you");
             System.out.println("[0] to stop");
             int opt = functions.next_int("Enter : ");
             if (opt==1){
@@ -162,6 +164,9 @@ public class Case_functions {
             else if (opt==2){
                 viewall();
 
+            }
+            else if (opt==3){
+                viewusercase();
             }
             else if(opt==0){
                 break;
@@ -189,34 +194,58 @@ public class Case_functions {
         ArrayList<Case> cases = copyObjectFromFile();
         Case acase = Checkbyid(cases,id);
         if (key == 4){
+            System.out.println("Enter index of id to change from 0. If index doesnt exist id will be appended.");
+            System.out.println("Enter index to change : ");
+            int index = functions.next_int("Enter : ");
+            System.out.println("Enter new id : ");
+            int intvalue = functions.next_int("Enter : ");
             try {
-                System.out.println("Enter index to change : ");
-                int index = functions.next_int("Enter : ");
                 assert acase != null;
                 arrvalues = acase.getEvidence_id();
-                System.out.println("Enter new id : ");
-                int intvalue = functions.next_int("Enter : ");
                 arrvalues.set(index, intvalue);
             }
             catch (IndexOutOfBoundsException e){
-                System.out.println("Index not found");
-                UpdateCase();
+                if (checkpeoplevidence(intvalue,'e',arrvalues)){
+                    System.out.println("Index not found , id already exist");
+                }
+                else {
+                    boolean hasid = evidence.checkid(intvalue);
+                    if (hasid) {
+                        System.out.println("Index not found but added it at last index!");
+                        arrvalues.add(intvalue);
+                    }
+                    else {
+                        System.out.println("Evidence id doesnt exist!");
+                    }
+                }
             }
 
         }
         else if (key ==5){
+            System.out.println("Enter index of id to change from 0. If index doesnt exist id will be appended.");
+            System.out.println("Enter index to change : ");
+            int index = functions.next_int("Enter : ");
+            System.out.println("Enter new id :");
+            int intvalue = functions.next_int("Enter : ");
             try {
-                System.out.println("Enter index to change : ");
-                int index = functions.next_int("Enter : ");
                 assert acase != null;
                 arrvalues = acase.getPeople_id();
-                System.out.println("Enter new id :");
-                int intvalue = functions.next_int("Enter : ");
                 arrvalues.set(index, intvalue);
             }
             catch (IndexOutOfBoundsException e){
-                System.out.println("Index not found");
-                UpdateCase();
+                if (checkpeoplevidence(intvalue,'p',arrvalues)){
+                    System.out.println("Index not found , id already exist");
+                }
+                else {
+                    boolean hasid = person.checkid(intvalue);
+                    if (hasid) {
+                        System.out.println("Index not found but added it at last index!");
+                        arrvalues.add(intvalue);
+                    }
+                    else {
+                        System.out.println("People id doesnt exist");
+                    }
+                }
             }
         }
         else {
@@ -247,6 +276,28 @@ public class Case_functions {
 
 
     }
+
+    private  void viewusercase(){
+        ArrayList<Case> objects = copyObjectFromFile();
+        System.out.println(" ");
+        System.out.println(" ");
+        if(objects.size()==1){
+            if(objects.get(0).getId()==0){
+                System.out.println("Evidence is Empty!");
+            }
+        }
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                if (objects.get(i).getAdded_by().equals(login.user_name)) {
+                    print(objects.get(i));
+                }
+            }
+
+        }
+
+    }
+
+
     private void Updatebyid(int id, int key, String value, ArrayList<Integer> arrval) throws IOException {
         ArrayList<Case> cases = copyObjectFromFile();
         Case acase = Checkbyid(cases,id);
@@ -278,6 +329,7 @@ public class Case_functions {
             System.out.println("ID not found!");
             System.out.println();
         }
+        sortbyid();
 
     }
 
@@ -370,6 +422,7 @@ public class Case_functions {
     }
 
     private void print(Case CaseObject) {
+        functions.clear_screen();
         functions.print_label("-");
         System.out.println();
         System.out.println("Case id          : "+CaseObject.getId());

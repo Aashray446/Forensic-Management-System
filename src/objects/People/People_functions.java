@@ -2,6 +2,7 @@ package objects.People;
 
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
+import objects.Case.Case;
 import pages.Login;
 
 import java.io.BufferedReader;
@@ -23,6 +24,7 @@ public class People_functions {
         while (true){
             System.out.println("[1] to view People by id");
             System.out.println("[2] to view all People");
+            System.out.println("[3] to view people added by you");
             System.out.println("[0] to stop");
             String opt = functions.next_line("Enter the option : ");
             if (opt.equals("1")){
@@ -41,6 +43,9 @@ public class People_functions {
             }
             else if(opt.equals("0")){
                 break;
+            }
+            else if(opt.equals("3")){
+                viewuserpeople();
             }
             else{
                 System.out.println("Wrong Choice !");
@@ -126,6 +131,26 @@ public class People_functions {
             }
         }
 
+
+    }
+
+    private  void viewuserpeople(){
+        ArrayList<People> objects = copyObjectFromFile();
+        System.out.println(" ");
+        System.out.println(" ");
+        if(objects.size()==1){
+            if(objects.get(0).getId()==0){
+                System.out.println("Evidence is Empty!");
+            }
+        }
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                if (objects.get(i).getAdded_by().equals(login.user_name)) {
+                    print(objects.get(i));
+                }
+            }
+
+        }
 
     }
 
