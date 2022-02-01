@@ -19,9 +19,10 @@ public class People_functions {
     Login login = Login.getInstance();
 
     public void ViewPeople() {
-       
-        functions.clear_screen();
         while (true){
+            functions.wait_for_user();
+            functions.clear_screen();
+            functions.print_label("VIEW PEOPLE");
             System.out.println("[1] to view People by id");
             System.out.println("[2] to view all People");
             System.out.println("[3] to view people added by you");
@@ -42,6 +43,7 @@ public class People_functions {
 
             }
             else if(opt.equals("0")){
+                functions.clear_screen();
                 break;
             }
             else if(opt.equals("3")){
@@ -55,7 +57,11 @@ public class People_functions {
     }
 
     public People AddPeople() {
+        functions.wait_for_user();
         functions.clear_screen();
+        functions.print_label("ADD PEOPLE");
+        System.out.println();
+        System.out.println("Enter following details to add people");
         int id = functions.get_id("People.csv");
         String name = functions.next_line("Enter name : ");
         String address = functions.next_line("Enter address : ");
@@ -65,18 +71,24 @@ public class People_functions {
         String comments = functions.next_line("Enter comment : ");
         String addedby = login.user_name;
         String statements_given = functions.next_line("Enter statements given :");
-
         People PeopleObject = new People(id, name, address, desription, category, reason, comments, addedby, statements_given);
         String content = PeopleObject.toString();
         dbms.append(content, "People.csv");
-        sortbyid();
+        System.out.println();
+        System.out.println("PEOPLE ADDED!");
+        functions.wait_for_user();
+        functions.clear_screen();
         return PeopleObject;
+
     }
 
     public void UpdatePeople() {
+        functions.wait_for_user();
         functions.clear_screen();
-        System.out.println("Enter People id : ");
-        int id = functions.next_int("Enter : ");
+        functions.print_label("UPDATE PEOPLE");
+        System.out.println();
+        System.out.println("Enter followind details to update people.");
+        int id = functions.next_int("Enter People id : ");
         System.out.println("[1] to change name");
         System.out.println("[2] to change address");
         System.out.println("[3] to change description ");
@@ -94,19 +106,31 @@ public class People_functions {
             e.printStackTrace();
         }
         sortbyid();
+        System.out.println();
+        System.out.println("PEOPLE UPDATED!");
+        functions.wait_for_user();
+        functions.clear_screen();
 
     }
 
     public void RemovePeople() {
+        functions.wait_for_user();
         functions.clear_screen();
-        System.out.println("Enter People id : ");
-        int id = functions.next_int("Enter : ");
+        functions.print_label("REMOVE PEOPLE");
+        System.out.println();
+        System.out.println("Enter following details to remove people.");
+        functions.clear_screen();
+        int id = functions.next_int("Enter People id : ");
         try {
             Deletebyid(id);
         } catch (IOException e) {
             e.printStackTrace();
         }
         sortbyid();
+        System.out.println();
+        System.out.println("PEOPLE REMOVED!");
+        functions.wait_for_user();
+        functions.clear_screen();
 
     }
     public boolean checkid(int id){
@@ -122,11 +146,11 @@ public class People_functions {
     }
     private void viewall(){
         ArrayList<People> objects = copyObjectFromFile();
-        if(objects.size()==1){
+        if(objects.size()==0){
             System.out.println("People data is empty!");
         }
         else {
-            for (int i = 1; i < objects.size(); i++) {
+            for (int i = 0; i < objects.size(); i++) {
                 print(objects.get(i));
             }
         }
@@ -137,19 +161,20 @@ public class People_functions {
     private  void viewuserpeople(){
         ArrayList<People> objects = copyObjectFromFile();
         System.out.println(" ");
-        System.out.println(" ");
-        if(objects.size()==1){
-            if(objects.get(0).getId()==0){
-                System.out.println("Evidence is Empty!");
-            }
+        if(objects.size()==0){
+            System.out.println("People is Empty!");
         }
         else {
+            boolean found = false;
             for (int i = 0; i < objects.size(); i++) {
                 if (objects.get(i).getAdded_by().equals(login.user_name)) {
                     print(objects.get(i));
+                    found = true;
                 }
             }
-
+            if(found==false){
+                System.out.println("Couldn't find!");
+            }
         }
 
     }
@@ -247,7 +272,7 @@ public class People_functions {
             while ((line = br.readLine()) != null) {
                 String[] pep = line.split(",");
                 try {
-                    People PeopleObject = new People(Integer.valueOf(pep[0]), pep[1], pep[2], pep[3], pep[4], pep[5], pep[6], pep[8], pep[7]);
+                    People PeopleObject = new People(Integer.valueOf(pep[0]), pep[1], pep[2], pep[3], pep[4], pep[5], pep[6], pep[7], pep[8]);
                     people.add(PeopleObject);
                 }
                 catch (NumberFormatException e){

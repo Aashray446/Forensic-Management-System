@@ -15,10 +15,13 @@ public class Evidence_functions {
     handle_dbms dbms = handle_dbms.getInstance();
     helper_functions functions = helper_functions.getInstance();
     Login login = Login.getInstance();
+    boolean found = false;
 
     public void ViewEvidence(){
-        functions.clear_screen();
         while (true){
+            functions.wait_for_user();
+            functions.clear_screen();
+            functions.print_label("VIEW EVIDENCES");
             System.out.println("[1] to view Evidence by id");
             System.out.println("[2] to view all Evidences");
             System.out.println("[3] to view by date");
@@ -41,19 +44,19 @@ public class Evidence_functions {
 
             }
             else if(opt==3){
-                System.out.print("Enter date (format : DD-MM-YYYY) : ");
+                System.out.println("Enter date (format : DD-MM-YYYY)");
                 String date = functions.next_line("Enter : ");
                 viewbydate(date);
             }
             else if(opt==4){
-                System.out.print("Enter type : ");
-                String type = functions.next_line("Enter : ");
+                String type = functions.next_line("Enter type : ");
                 viewbytype(type);
             }
             else if (opt==5){
                 viewuserevidence();
             }
             else if(opt==0){
+                functions.clear_screen();
                 break;
             }
             else{
@@ -64,7 +67,10 @@ public class Evidence_functions {
     }
 
     public Evidence AddEvidence(){
+        functions.wait_for_user();
         functions.clear_screen();
+        functions.print_label("ADD EVIDENCE");
+        System.out.println("");
         System.out.println("Please Enter the following details to add new Evidence");
         System.out.println();
         int evidenceid = functions.get_id("Evidences.csv");
@@ -72,23 +78,26 @@ public class Evidence_functions {
         String evidencedescription = functions.next_line("Enter evidence Description : ");
         String evidencetype = functions.next_line("Enter evidence Type : ");
         String timeofcollection = functions.next_line("Enter Time of collection : ");
-        System.out.println("Enter data in DD-MM-YYYY format");
-        String dateofcollection = functions.next_line("Enter Date of collection : ");
+        String dateofcollection = functions.next_line("Enter Date of collection (DD-MM-YYYY) : ");
         String placeofcollection = functions.next_line("Enter Place of collection : ");
         String collectedby = functions.next_line("Enter Collected by: ");
         String addedby = login.user_name;
         Evidence EvidenceObject = new Evidence(evidenceid,evidencename,evidencedescription,evidencetype,timeofcollection,dateofcollection,placeofcollection,collectedby,addedby);
         String content = EvidenceObject.toString();
         dbms.append(content,"Evidences.csv");
-        sortbyid();
+        System.out.println();
+        System.out.println("Evidences Added!");
+        functions.wait_for_user();
+        functions.clear_screen();
         return EvidenceObject;
     }
     public void UpdateEvidence(){
+        functions.wait_for_user();
         functions.clear_screen();
+        functions.print_label("UPDATE EVIDENCE");
         System.out.println("Enter following details to Update evidences.");
         System.out.println();
-        System.out.println("Enter Evidence id : ");
-        int id = functions.next_int("Enter : ");
+        int id = functions.next_int("Enter Evidence id : ");
         System.out.println("[1] to change Evidence name");
         System.out.println("[2] to change Evidence description");
         System.out.println("[3] to change Evidence Type ");
@@ -96,7 +105,6 @@ public class Evidence_functions {
         System.out.println("[5] to change Date of collection");
         System.out.println("[6] to change Place of collection");
         System.out.println("[7] to change Collected by");
-        System.out.println("Enter key :");
         int key = functions.next_int("Enter : ");
         String value = functions.next_line("Enter value to change : ");
         try {
@@ -105,9 +113,16 @@ public class Evidence_functions {
             e.printStackTrace();
         }
         sortbyid();
+        System.out.println();
+        System.out.println("Evidences Updated!");
+        functions.wait_for_user();
+        functions.clear_screen();
 
     }
     public void RemoveEvidence(){
+        functions.wait_for_user();
+        functions.clear_screen();
+        functions.print_label("REMOVE EVIDENCE");
         System.out.println("Enter following details to Delete Evidence.");
         System.out.println();
         System.out.println("Enter Evidence id : ");
@@ -118,6 +133,10 @@ public class Evidence_functions {
             e.printStackTrace();
         }
         sortbyid();
+        System.out.println();
+        System.out.println("Evidences Removed!");
+        functions.wait_for_user();
+        functions.clear_screen();
 
     }
 
@@ -171,13 +190,11 @@ public class Evidence_functions {
 
     private void viewall(){
         ArrayList<Evidence> objects = copyObjectFromFile();
-        if(objects.size()==1){
-
+        if(objects.size()==0){
             System.out.println("Evidence is Empty!");
-
         }
         else {
-            for (int i = 1; i < objects.size(); i++) {
+            for (int i = 0; i < objects.size(); i++) {
                 print(objects.get(i));
             }
         }
@@ -187,7 +204,7 @@ public class Evidence_functions {
     private void viewbydate(String d){
         ArrayList<Evidence> objects = copyObjectFromFile();
         System.out.println(" ");
-        if(objects.size()==1){
+        if(objects.size()<1){
             if(objects.get(0).getEvidenceid()==0){
                 System.out.println("Evidence is Empty!");
             }
@@ -196,7 +213,11 @@ public class Evidence_functions {
             for (int i = 0; i < objects.size(); i++) {
                 if (objects.get(i).getDateofcollection().equals(d)) {
                     print(objects.get(i));
+                    found=true;
                 }
+            }
+            if(found==false){
+                System.out.println("Couldn't find!");
             }
 
         }
@@ -206,8 +227,7 @@ public class Evidence_functions {
     private  void viewuserevidence(){
         ArrayList<Evidence> objects = copyObjectFromFile();
         System.out.println(" ");
-        System.out.println(" ");
-        if(objects.size()==1){
+        if(objects.size()<1){
             if(objects.get(0).getEvidenceid()==0){
                 System.out.println("Evidence is Empty!");
             }
@@ -216,7 +236,11 @@ public class Evidence_functions {
             for (int i = 0; i < objects.size(); i++) {
                 if (objects.get(i).getAddedby().equals(login.user_name)) {
                     print(objects.get(i));
+                    found = true;
                 }
+            }
+            if(found==false){
+                System.out.println("Couldn't find!");
             }
 
         }
@@ -226,7 +250,7 @@ public class Evidence_functions {
     private void viewbytype(String t){
 
         ArrayList<Evidence> objects = copyObjectFromFile();
-        if(objects.size()==1){
+        if(objects.size()==0){
             if(objects.get(0).getEvidenceid()==0){
                 System.out.println("Evidence is Empty!");
             }
@@ -236,7 +260,11 @@ public class Evidence_functions {
             for (int i = 0; i < objects.size(); i++) {
                 if ((objects.get(i).getEvidencetype().toUpperCase().trim()).equals(t.toUpperCase().trim())) {
                     print(objects.get(i));
+                    found=true;
                 }
+            }
+            if(found==false){
+                System.out.println("Couldn't find!");
             }
 
         }
