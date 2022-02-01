@@ -1,4 +1,6 @@
 package objects.Case;
+import Helper_class.handle_dbms;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -10,6 +12,7 @@ public class Case {
     private String added_by;
     private ArrayList<Integer> people_id;
 
+    handle_dbms functions = handle_dbms.getInstance();
 
     public Case(int id, String name, String description, ArrayList<Integer> evidence_id, String added_by, ArrayList<Integer> people_id) {
         this.id = id;
@@ -68,13 +71,6 @@ public class Case {
         this.people_id = people_id;
     }
 
-    public static Comparator<Case> getStuCaseId() {
-        return StuCaseId;
-    }
-
-    public static void setStuCaseId(Comparator<Case> stuCaseId) {
-        StuCaseId = stuCaseId;
-    }
 
     public static Comparator<Case> StuCaseId = new Comparator<>() {
 
@@ -86,23 +82,34 @@ public class Case {
 
         }
     };
+
     @Override
-    public String toString() {
+    public String toString(){
         String evid = "";
         String peid = "";
-        for (int i = 0; i < evidence_id.size(); i++) {
-            evid += evidence_id.get(i);
-            if (i != people_id.size()-1){
-                evid += " ";
+        try {
+            for (int i = 0; i < this.evidence_id.size(); i++) {
+                evid += evidence_id.get(i);
+                if (i != people_id.size() - 1) {
+                    evid += " ";
+                }
             }
         }
-        for (int i = 0; i < people_id.size(); i++) {
-            peid += people_id.get(i);
-            if (i!= people_id.size()-1){
-                peid += " ";
-            }
+        catch (NullPointerException e){
+            evid = " ";
+        }
+        try{
+            for (int i = 0; i < this.people_id.size(); i++) {
+                peid += people_id.get(i);
+                if (i!= people_id.size()-1){
+                    peid += " ";
+                }
 
+            }
         }
-        return id+","+name+","+description+","+evid+","+added_by+","+peid+"\n";
+        catch (NullPointerException e){
+            peid=" ";
+        }
+        return this.id+","+this.name+","+this.description+","+evid+","+this.added_by+","+peid+"\n";
     }
 }

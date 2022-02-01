@@ -15,6 +15,16 @@ public class Login {
     helper_functions help = helper_functions.getInstance();
     handle_dbms dbms = handle_dbms.getInstance();
 
+    private static Login instance;
+
+    public static Login getInstance(){
+        if(instance == null){
+            instance  = new Login();
+        }
+        return instance;
+
+    }
+
     
     public void start() {
         help.clear_screen();
@@ -45,7 +55,7 @@ public class Login {
 
     public void login(){
         Scanner in = new Scanner(System.in);
-        Login login_session = new Login();
+        Login login_session = Login.getInstance();
         while(true) {
             login_session.start();
             if(login_session.check_password()) {

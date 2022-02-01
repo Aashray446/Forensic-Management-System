@@ -2,6 +2,7 @@ package objects.People;
 
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
+import pages.Login;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,6 +15,7 @@ public class People_functions {
 
     handle_dbms dbms = handle_dbms.getInstance();
     helper_functions functions = helper_functions.getInstance();
+    Login login = Login.getInstance();
 
     public void ViewPeople() {
        
@@ -56,7 +58,7 @@ public class People_functions {
         String category = functions.next_line("Enter category : ");
         String reason = functions.next_line("Enter reason : ");
         String comments = functions.next_line("Enter comment : ");
-        String addedby = functions.next_line("Enter addedby : ");
+        String addedby = login.user_name;
         String statements_given = functions.next_line("Enter statements given :");
 
         People PeopleObject = new People(id, name, address, desription, category, reason, comments, addedby, statements_given);

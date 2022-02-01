@@ -1,6 +1,7 @@
 package objects.Evidence;
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
+import pages.Login;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class Evidence_functions {
 
     handle_dbms dbms = handle_dbms.getInstance();
     helper_functions functions = helper_functions.getInstance();
+    Login login = Login.getInstance();
 
     public void ViewEvidence(){
         functions.clear_screen();
@@ -68,7 +70,8 @@ public class Evidence_functions {
         String dateofcollection = functions.next_line("Enter Date of collection : ");
         String placeofcollection = functions.next_line("Enter Place of collection : ");
         String collectedby = functions.next_line("Enter Collected by: ");
-        Evidence EvidenceObject = new Evidence(evidenceid,evidencename,evidencedescription,evidencetype,timeofcollection,dateofcollection,placeofcollection,collectedby);
+        String addedby = login.user_name;
+        Evidence EvidenceObject = new Evidence(evidenceid,evidencename,evidencedescription,evidencetype,timeofcollection,dateofcollection,placeofcollection,collectedby,addedby);
         String content = EvidenceObject.toString();
         dbms.append(content,"Evidences.csv");
         sortbyid();
@@ -276,11 +279,11 @@ public class Evidence_functions {
             while ((line = br.readLine()) != null) {
                 String[] evidences = line.split(",");
                 try{
-                    Evidence EvidenceObject = new Evidence(Integer.valueOf(evidences[0]), evidences[1], evidences[2], evidences[3], evidences[4], evidences[5], evidences[6], evidences[7]);
+                    Evidence EvidenceObject = new Evidence(Integer.valueOf(evidences[0]), evidences[1], evidences[2], evidences[3], evidences[4], evidences[5], evidences[6], evidences[7],evidences[8]);
                     Evidences.add(EvidenceObject);
 
                 }catch (NumberFormatException e){
-                    Evidence EvidenceObject = new Evidence(0, "name","description","type","time","date", "place","collectedby");
+                    Evidence EvidenceObject = new Evidence(0, "name","description","type","time","date", "place","collectedby","addedby");
                     Evidences.add(EvidenceObject);
 
                 }
