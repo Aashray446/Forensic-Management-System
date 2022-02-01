@@ -12,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Case_functions {
@@ -387,26 +386,27 @@ public class Case_functions {
         ArrayList<Case> Cases = new ArrayList<>();
         String line;
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/Database/Cases.csv"));
-            while ((line = br.readLine()) != null) {
-                try{
-                    String[] cases = line.split(",");
-                    String[] evid = cases[3].split(" ");
-                    String[] peid = cases[5].split(" ");
-                    ArrayList<Integer> evidence_id = new ArrayList<>();
-                    ArrayList<Integer> people_id = new ArrayList<>();
-                    for (String s : evid) {
-                        evidence_id.add(Integer.valueOf(s));
-                    }
-                    for (String s : peid) {
-                        people_id.add(Integer.valueOf(s));
-                    }
-                    Case CaseObject = new Case(Integer.valueOf(cases[0]), cases[1], cases[2], evidence_id, cases[4], people_id);
-                    Cases.add(CaseObject);
+            try (BufferedReader br = new BufferedReader(new FileReader("src/Database/Cases.csv"))) {
+                while ((line = br.readLine()) != null) {
+                    try{
+                        String[] cases = line.split(",");
+                        String[] evid = cases[3].split(" ");
+                        String[] peid = cases[5].split(" ");
+                        ArrayList<Integer> evidence_id = new ArrayList<>();
+                        ArrayList<Integer> people_id = new ArrayList<>();
+                        for (String s : evid) {
+                            evidence_id.add(Integer.valueOf(s));
+                        }
+                        for (String s : peid) {
+                            people_id.add(Integer.valueOf(s));
+                        }
+                        Case CaseObject = new Case(Integer.valueOf(cases[0]), cases[1], cases[2], evidence_id, cases[4], people_id);
+                        Cases.add(CaseObject);
 
-                }catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
-                    Case CaseObject = new Case(0,"name", "description",null,"addedby",null);
-                    Cases.add(CaseObject);
+                    }catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
+                        Case CaseObject = new Case(0,"name", "description",null,"addedby",null);
+                        Cases.add(CaseObject);
+                    }
                 }
             }
         } catch (IOException e) {

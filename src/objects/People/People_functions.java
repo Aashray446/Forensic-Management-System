@@ -2,7 +2,6 @@ package objects.People;
 
 import Helper_class.handle_dbms;
 import Helper_class.helper_functions;
-import objects.Case.Case;
 import pages.Login;
 
 import java.io.BufferedReader;
@@ -10,7 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 public class People_functions {
 
