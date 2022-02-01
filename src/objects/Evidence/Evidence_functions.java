@@ -72,6 +72,7 @@ public class Evidence_functions {
         String evidencedescription = functions.next_line("Enter evidence Description : ");
         String evidencetype = functions.next_line("Enter evidence Type : ");
         String timeofcollection = functions.next_line("Enter Time of collection : ");
+        System.out.println("Enter data in DD-MM-YYYY format");
         String dateofcollection = functions.next_line("Enter Date of collection : ");
         String placeofcollection = functions.next_line("Enter Place of collection : ");
         String collectedby = functions.next_line("Enter Collected by: ");
