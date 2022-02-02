@@ -90,15 +90,10 @@ public class Case {
         try {
             for (int i = 0; i < this.evidence_id.size(); i++) {
                 evid += evidence_id.get(i);
-                if (i != people_id.size() - 1) {
+                if (i != evidence_id.size() - 1) {
                     evid += " ";
                 }
             }
-        }
-        catch (NullPointerException e){
-            evid = " ";
-        }
-        try{
             for (int i = 0; i < this.people_id.size(); i++) {
                 peid += people_id.get(i);
                 if (i!= people_id.size()-1){
@@ -107,9 +102,7 @@ public class Case {
 
             }
         }
-        catch (NullPointerException e){
-            peid=" ";
-        }
+        catch (NullPointerException e){}
         return this.id+","+this.name+","+this.description+","+evid+","+this.added_by+","+peid+"\n";
     }
 }
