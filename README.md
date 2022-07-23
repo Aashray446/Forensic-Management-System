@@ -57,3 +57,7 @@ src
 <strong>3</strong>. object.convert_to_string(Filename as String) <strong><em> <br> [Will convert the ArrayList data back to CSV format i.e string, to be supplied to append ]</em></strong></p>
 
 ---
+<h3>How to run ?? </h3>
+<p>Install JDK and any of your favorite code editor</p>
+<p>Default username and password is given in User.csv file</p>
+<p>Entry point for the program is Main.java</p>
